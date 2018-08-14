@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+  
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <title>Д-р Арабаджикова</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-sm navbar-light bg-light">
+    <span class="navbar-brand d-none d-sm-block mb-0 h1">Меню:</span>
+    <span class="navbar-text d-block d-sm-none" status-text-field></span>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="nav nav-pills nav-tabs mr-auto flex-column flex-sm-row" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active text-center" id="uzd-tab" data-toggle="tab" href="#nav-uzd" role="tab" controls="data">УЗД</a>
+        <a class="nav-item nav-link text-center" id="nav-admin-tab" data-toggle="tab" href="#nav-admin" role="tab" controls="admin">Settings</a>
+        <a class="nav-item nav-link text-center" id="nav-about-tab" data-toggle="modal" href="#nav-about" role="tab" data-target="#nav-about">About</a>
+      </div>
+    </div>
+  </nav>
+  <div class="tab-content mt-3">
+    <div class="tab-pane fade show active" id="nav-uzd" role="tabpanel">
+      <div class="container">
+        <p class="h2 text-center">Ултразвукова Пренатална Диагностика</p>
+        <hr>
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-10">
+              <label for="patient_name">Пациент</label>
+              <input type="text" class="form-control" id="patient_name" placeholder="име пациент">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="patient_age">Възраст</label>
+              <input type="number" class="form-control" min="10" max="99" id="patient_age" placeholder="години">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="inputAddress">Адрес</label>
+              <input type="text" class="form-control" id="inputAddress" placeholder="ул. Белмекен 2">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md">
+              <label for="prm">ПРМ</label>
+              <input type="date" class="form-control" id="prm">
+            </div>
+            <div class="form-group col-md">
+              <label for="date_uzi">Дата УЗИ</label>
+              <input type="date" class="form-control" id="date_uzi">
+            </div>
+            <div class="form-group col-md">
+              <label for="gv_po_prm">ГВ по ПРМ</label>
+              <div class="input-group">
+                <input type="number" class="form-control" min="0" max="50" id="gv_po_prm_weeks">
+                <div class="input-group-append"><span class="input-group-text">с.</span></div>
+                <input type="number" class="form-control" min="0" max="6" id="gv_po_prm_days">
+                <div class="input-group-append"><span class="input-group-text">дни</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md">
+              <label for="vtr">ВТР</label>
+              <input type="date" class="form-control" id="vtr">
+            </div>
+            <div class="form-group col-md">
+              <label for="corrected_vtr">Коригиран ВТР</label>
+              <input type="date" class="form-control" id="corrected_vtr">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="anamneza">Акушерска анамнеза</label>
+              <input type="text" class="form-control" id="anamneza" value="Бременност" placeholder="Бременност">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="family_predisposition">Фамилна обремененост</label>
+              <input type="text" class="form-control" id="family_predisposition">
+            </div>
+          </div>
+          <hr>
+          <p class="h5 text-center">УЗД</p>
+          <div class="form-row">
+            <div class="form-group col-md-10">
+              <label for="predlezhanie">Предлежание</label>
+              <input type="text" class="form-control" id="predlezhanie">
+            </div>
+            <div class="form-group col-md-2">
+              <label>Пол</label>
+              <div class="form-group">
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input class="custom-control-input" type="radio" name="sexRadios" id="sex_male" value="male">
+                  <label class="custom-control-label" for="sex_male">M</label>
+                </div>
+                <div class="custom-control custom-radio custom-control-inline">
+                  <input class="custom-control-input" type="radio" name="sexRadios" id="sex_female" value="female">
+                  <label class="custom-control-label" for="sex_female">F</label>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-10">
+              <label for="fetal_movements">Движение на плода</label>
+              <input type="text" class="form-control" id="fetal_movements">
+            </div>
+            <div class="form-group col-md-2">
+              <label for="featal_heart_rate">СЧП</label>
+              <div class="input-group">
+                <input type="number" class="form-control" min="0" id="featal_heart_rate">
+                <div class="input-group-append"><span class="input-group-text">уд/мин</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="placenta">Плацента</label>
+              <input type="text" class="form-control" id="placenta">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-12">
+              <label for="papna_vrav">Пъпна връв</label>
+              <input type="text" class="form-control" id="papna_vrav">
+            </div>
+          </div>
+          <hr>
+          <p class="h5 text-center">Биометрия</p>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group row ">
+                <label class="col-md-1 col-form-label mr-1">BPD</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="bpd_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="bpd_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group row">
+                <label class="col-md-1 col-form-label mr-1">OFD</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="ofd_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="ofd_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group row ">
+                <label class="col-md-1 col-form-label mr-1">HC</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="hc_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="hc_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group row">
+                <label class="col-md-1 col-form-label mr-1">Vp</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="vp_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="vp_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group row ">
+                <label class="col-md-1 col-form-label mr-1">TCD</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="tcd_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="tcd_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group row">
+                <label class="col-md-1 col-form-label mr-1">CM</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="cm_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="cm_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group row ">
+                <label class="col-md-1 col-form-label mr-1">NF</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="nf_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="nf_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group row">
+                <label class="col-md-1 col-form-label mr-1">NB</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="nb_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="nb_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group row ">
+                <label class="col-md-1 col-form-label mr-1">APAD</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="apad_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="apad_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group row">
+                <label class="col-md-1 col-form-label mr-1">TAD</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="tad_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="tad_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group row ">
+                <label class="col-md-1 col-form-label mr-1">AC</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="ac_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="ac_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group row">
+                <label class="col-md-1 col-form-label mr-1">FL</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="fl_mm">
+                    <div class="input-group-append"><span class="input-group-text">mm</span></div>
+                    <input type="number" class="form-control" min="0" id="fl_gs">
+                    <div class="input-group-append"><span class="input-group-text">г.с.</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row ">
+                <label class="col-md-1 col-form-label mr-1">EFW</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="number" class="form-control" min="0" id="efw_mm">
+                    <div class="input-group-append"><span class="input-group-text">g</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md">
+              <div class="form-group row ">
+                <label class="col-md-1 col-form-label mr-1">LA</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="text" class="form-control" min="0" id="la" placeholder="текст">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md">
+              <div class="form-group row ">
+                <label class="col-md-1 col-form-label mr-1">LC</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <input type="text" class="form-control" min="0" id="lc" placeholder="текст">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <p class="h5 text-center">Анатомия на плода</p>
+          <div class="form-group row ">
+            <label class="col-md-2 col-form-label mr-1">Глава</label>
+            <div class="col-md"><input type="text" class="form-control" id="head"></div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-2 col-form-label mr-1">Мозък</label>
+            <div class="col-md"><input type="text" class="form-control" id="brain"></div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-2 col-form-label mr-1">Лице</label>
+            <div class="col-md"><input type="text" class="form-control" id="face"></div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-2 col-form-label mr-1">Шия/Кожа</label>
+            <div class="col-md"><input type="text" class="form-control" id="neck_skin"></div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-2 col-form-label mr-1">Гръбначен стълб</label>
+            <div class="col-md"><input type="text" class="form-control" id="spine"></div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-2 col-form-label mr-1">Гръден кош</label>
+            <div class="col-md"><input type="text" class="form-control" id="chest"></div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-2 col-form-label mr-1">Сърце</label>
+            <div class="col-md"><input type="text" class="form-control" id="heart"></div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-2 col-form-label mr-1">Корем</label>
+            <div class="col-md"><input type="text" class="form-control" id="belly"></div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-2 col-form-label mr-1">Бъбреци</label>
+            <div class="col-md"><input type="text" class="form-control" id="kidney"></div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-2 col-form-label mr-1">Крайници</label>
+            <div class="col-md"><input type="text" class="form-control" id="arms"></div>
+          </div>
+          <div class="form-group row ">
+            <label class="col-md-2 col-form-label mr-1">Скелет</label>
+            <div class="col-md"><input type="text" class="form-control" id="skeleton"></div>
+          </div>
+          <div class="row">
+            <div class="col-lg">
+              <div class="form-group row ">
+                <label class="col-md-2 col-form-label pr-0">A. ut. Dex</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text">PI</span></div>
+                    <input type="number" class="form-control" min="0" id="autdex_pi">
+                    <div class="input-group-prepend"><span class="input-group-text">RI</span></div>
+                    <input type="number" class="form-control" min="0" id="autdex_ri">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg">
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label">A. ut. Sin</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text">PI</span></div>
+                    <input type="number" class="form-control" min="0" id="autsin_pi">
+                    <div class="input-group-prepend"><span class="input-group-text">RI</span></div>
+                    <input type="number" class="form-control" min="0" id="autsin_ri">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg">
+              <div class="form-group row ">
+                <label class="col-md-2 col-form-label ">A. umb.</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text">PI</span></div>
+                    <input type="number" class="form-control" min="0" id="aumb_pi">
+                    <div class="input-group-prepend"><span class="input-group-text">RI</span></div>
+                    <input type="number" class="form-control" min="0" id="aumb_ri">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg">
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label">CMA</label>
+                <div class="col-md">
+                  <div class="input-group">
+                    <div class="input-group-prepend"><span class="input-group-text">PI</span></div>
+                    <input type="number" class="form-control" min="0" id="cma_pi">
+                    <div class="input-group-prepend"><span class="input-group-text">PSV</span></div>
+                    <input type="number" class="form-control" min="0" id="cma_psv">
+                    <div class="input-group-append"><span class="input-group-text">mm/sec</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg">
+              <div class="form-group row ">
+                <label class="col-md-2 col-form-label">CPR</label>
+                <div class="col-md">
+                  <div class="">
+
+                    <input type="number" class="form-control" min="0" id="cpr">
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg">
+              <div class="form-group row">
+                <label class="col-md-2 col-form-label pr-0 mr-1">Duc. Ven.</label>
+                <div class="col-md">
+                  <div class="input-group">
+
+                    <input type="number" class="form-control" min="0" id="duc_ven">
+                    <div class="input-group-append"><span class="input-group-text">mm/sec</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <p class="h5 text-center">Коментар</p>
+          <div>
+            <div class="col-md"><input type="text" class="form-control" id="comment"></div>
+          </div>
+          <hr>
+          <p class="h6 text-center">Забележка</p>
+          <ul>
+            <li class="pb-0 mb-0"><small>Някои вродени аномалии на плода не могат да бъдат диагностицирани при ултразвуково изследване.</small></li>
+            <li class="pt-0 mt-0"><small>Хромозомните аномалии на плода не могат да се диагностицират чрез ултразвук.</small></li>
+          </ul>
+
+          <div class="row justify-content-around">
+            <button type="button" class="col-4 btn btn-lg btn-primary">Save</button>
+            <button type="button" class="col-4 btn btn-lg btn-primary">Print</button>
+          </div>
+        </form>
+        <br><br>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="nav-admin" role="tabpanel">
+      work in progress
+    </div>
+  </div>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+  <script>
+      $("input#prm").focusout(function(){
+        var today = new moment();
+        var prm_date = moment($("input#prm").val());
+        if (prm_date.isValid())
+        {
+          var gv=moment.duration(today.diff(prm_date));
+          var gv_weeks=today.diff(prm_date, "weeks");
+          var gv_days=today.diff(prm_date, "days")-7*gv_weeks;
+          $("input#gv_po_prm_weeks").val(gv_weeks);
+          $("input#gv_po_prm_days").val(gv_days);
+          console.log("weeks", gv_weeks);
+          console.log("days", gv_days);
+        }
+        else
+          console.log("invalid date");
+      });
+        
+    
+  </script>
+</body>
+
+</html>
