@@ -1,6 +1,13 @@
     var ga_dating_functions = {
       bpd2ga: {
         f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        },
+        f2: {
           title: "SAB",
           description: "<a target='_blank' href='http://www.glowm.com/section_view/heading/Assessment+of+Gestational+Age+by+Ultrasound/item/206%20'>Sabbagha RE., Hughey M.</a>",
           calc: function(x) {
@@ -17,8 +24,8 @@
             }
             return ga_weeks + " + " + ga_days;
           }
-        },
-        f2: {
+        },        
+        f3: {
           title: "NICO",
           description: "<a target='_blank' href='https://sonoworld.com/client/fetus/html/appendix-03/normal_fetal_biometry/appendix-03.htm'>Pilu, Nicolaides, Ximenes & Jeanty</a>",
           calc: function(x) {
@@ -76,6 +83,13 @@
       },
       ofd2ga: {
         f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        },        
+        f2: {
           title: "STD",
           description: "",
           calc: function(ofd) {
@@ -85,6 +99,13 @@
       },
       hc2ga: {
         f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        },        
+        f2: {
           title: "BMUS",
           description: "<a target='_blank' href='https://www.bmus.org/static/uploads/resources/Aug_2009_Fetal_Measurements_D3NApK5.pdf'>https://www.bmus.org</a>",
           calc: function(x) {
@@ -94,7 +115,7 @@
             return ga_weeks + " + " + ga_days;
           }
         },
-        f2: {
+        f3: {
           title: "HAD",
           description: "<a target='_blank' href='http://www.glowm.com/section_view/heading/Assessment+of+Gestational+Age+by+Ultrasound/item/206%20'>Hadlock FP., Deter RL., Harrist RB., Park SK.</a>",
           calc: function(x) {
@@ -112,7 +133,7 @@
             return ga_weeks + " + " + ga_days;
           }
         },
-        f3: {
+        f4: {
           title: "NICO",
           description: "<a target='_blank' href='https://sonoworld.com/client/fetus/html/appendix-03/normal_fetal_biometry/appendix-03.htm'>Pilu, Nicolaides, Ximenes & Jeanty</a>",
           calc: function(x) {
@@ -170,6 +191,13 @@
       },
       fl2ga: {
         f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        },        
+        f2: {
           title: "BMUS",
           description: "<a target='_blank' href='https://www.bmus.org/static/uploads/resources/Aug_2009_Fetal_Measurements_D3NApK5.pdf'>https://www.bmus.org</a>",
           calc: function(x) {
@@ -183,7 +211,7 @@
             return ga_weeks + " + " + ga_days;
           }
         },
-        f2: {
+        f3: {
           title: "HAD",
           description: "<a target='_blank' href='http://www.glowm.com/section_view/heading/Assessment+of+Gestational+Age+by+Ultrasound/item/206%20'>Hadlock FP., Deter RL., Harrist RB., Park SK.</a>",
           calc: function(x) {
@@ -202,7 +230,7 @@
             return ga_weeks + " + " + ga_days;
           }
         },
-        f3: {
+        f4: {
           title: "NICO",
           description: "<a target='_blank' href='https://sonoworld.com/client/fetus/html/appendix-03/normal_fetal_biometry/appendix-03.htm'>Pilu, Nicolaides, Ximenes & Jeanty</a>",
           calc: function(x) {
@@ -260,6 +288,13 @@
       },
       ac2ga: {
         f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        },        
+        f2: {
           title: "HAD",
           description: "<a target='_blank' href='http://www.glowm.com/section_view/heading/Assessment+of+Gestational+Age+by+Ultrasound/item/206%20'>Hadlock FP., Deter RL., Harrist RB., Park SK.</a>",
           calc: function(x) {
@@ -277,7 +312,7 @@
           }
 
         },
-        f2: {
+        f3: {
           title: "NICO",
           description: "<a target='_blank' href='https://sonoworld.com/client/fetus/html/appendix-03/normal_fetal_biometry/appendix-03.htm'>Pilu, Nicolaides, Ximenes & Jeanty</a>",
           calc: function(x) {
@@ -335,6 +370,13 @@
       },
       tcd2ga: {
         f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        },        
+        f2: {
           title: "IJLSMR",
           description: "<a target='_blank' href='https://www.researchgate.net/publication/237299201_Fetal_Transverse_Cerebellar_Diameter_Measurement_for_Prediction_of_Gestational_Age_in_Pregnant_Sudanese_Ladies'>International Journal of Life Science and Medical Research  Jun. 2013, Vol. 3 Iss. 3</a>",
           calc: function(x) {
@@ -348,7 +390,7 @@
             return ga_weeks + " + " + ga_days;
           }
         },
-        f2: {
+        f3: {
           title: "NICO",
           description: "<a target='_blank' href='https://sonoworld.com/client/fetus/html/appendix-03/normal_fetal_biometry/appendix-03.htm'>Pilu, Nicolaides, Ximenes & Jeanty</a>",
           calc: function(x) {
@@ -406,6 +448,13 @@
       },
       cm2ga:{
         f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        },        
+        f2: {
           title: "NICO",
           description: "<a target='_blank' href='https://sonoworld.com/client/fetus/html/appendix-03/normal_fetal_biometry/appendix-03.htm'>Pilu, Nicolaides, Ximenes & Jeanty</a>",
           calc: function(x) {
@@ -459,6 +508,13 @@
       },
       vp2ga:{
         f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        },        
+        f2: {
           title: "NICO",
           description: "<a target='_blank' href='https://sonoworld.com/client/fetus/html/appendix-03/normal_fetal_biometry/appendix-03.htm'>Pilu, Nicolaides, Ximenes & Jeanty</a>",
           calc: function(x) {
@@ -509,5 +565,41 @@
             return ga;
           }
         }
-      }      
+      },
+      nf2ga:{
+        f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        }
+      },
+      nb2ga:{
+        f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        }
+      },
+      apad2ga:{
+        f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        }
+      },
+      tad2ga:{
+        f1: {
+          title: "EXT",
+          description: "Външна калкулация",
+          calc: function(x) {
+            return null;
+          }
+        }
+      }       
     };

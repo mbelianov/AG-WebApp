@@ -14,6 +14,12 @@
     .no-spin::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
+    }   
+    
+    @page {
+      size: A3;
+      margin-top: 2cm;
+      margin-bottom: 2cm;
     }    
   </style>
   <title>Д-р Арабаджикова</title>
@@ -50,7 +56,7 @@
       <div class = "col border">
         <div class="tab-content mt-3">
           <div class="tab-pane fade show active" id="nav-uzd" role="tabpanel">
-            <div class="container d-flex flex-column">              
+            <div class="container d-flex flex-column px-0">              
               <p class="h2 text-center">Ултразвукова Пренатална Диагностика</p>
               <hr>
               <form class="mb-5" id="uzd">
@@ -118,12 +124,12 @@
                 <hr>
                 <p class="h5 text-center">УЗД</p>
                 <div class="form-row">
-                  <div class="form-group col-md-10">
-                    <label for="predlezhanie">Предлежание</label>
-                    <input type="text" class="form-control" id="predlezhanie">
+                  <div class="form-group col-md-10 mt-0 mb-1">
+                    <label class="my-0" for="predlezhanie">Предлежание</label>
+                    <input type="text" class="form-control form-control-sm" id="predlezhanie">
                   </div>
-                  <div class="form-group col-md-2">
-                    <label>Пол</label>
+                  <div class="form-group col-md-2 mt-0 mb-1">
+                    <label class="my-0">Пол</label>
                     <div class="form-group">
                       <div class="custom-control custom-radio custom-control-inline">
                         <input class="custom-control-input" type="radio" name="sexRadios" id="sex_male" value="male">
@@ -137,300 +143,278 @@
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-10">
-                    <label for="fetal_movements">Движение на плода</label>
-                    <input type="text" class="form-control" id="fetal_movements">
+                  <div class="form-group col-md-10 mt-0 mb-1">
+                    <label class="my-0" for="fetal_movements">Движение на плода</label>
+                    <input type="text" class="form-control form-control-sm" id="fetal_movements">
                   </div>
-                  <div class="form-group col-md-2">
-                    <label for="featal_heart_rate">СЧП</label>
-                    <div class="input-group">
+                  <div class="form-group col-md-2 mt-0 mb-1">
+                    <label class="my-0" for="featal_heart_rate">СЧП</label>
+                    <div class="input-group input-group-sm">
                       <input type="number" class="form-control" min="0" id="featal_heart_rate">
                       <div class="input-group-append"><span class="input-group-text">уд/мин</span></div>
                     </div>
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="placenta">Плацента</label>
-                    <input type="text" class="form-control" id="placenta">
+                  <div class="form-group col-md-12 mt-0 mb-1">
+                    <label class="my-0" for="placenta">Плацента</label>
+                    <input type="text" class="form-control form-control-sm" id="placenta">
                   </div>
                 </div>
                 <div class="form-row">
-                  <div class="form-group col-md-12">
-                    <label for="papna_vrav">Пъпна връв</label>
-                    <input type="text" class="form-control" id="papna_vrav">
+                  <div class="form-group col-md-12 mt-0 mb-1">
+                    <label class="my-0" for="papna_vrav">Пъпна връв</label>
+                    <input type="text" class="form-control form-control-sm" id="papna_vrav">
                   </div>
                 </div>
                 <hr>
                 <p class="h5 text-center">Биометрия</p>
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="mr-2">BPD</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="bpd2ga"></select></div>
-                          <input type="number" class="form-control no-spin" min="0" id="bpd_mm" purpose="biometric" ga_dating="bpd2ga-input">
+                    <div class="form-group  mt-0 mb-1">
+                        <label class="mr-2  my-0">BPD</label>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="bpd2ga"></select></div>
+                          <input type="number" class="form-control no-spin" step="any" min="0" id="bpd_mm" purpose="biometric" ga_dating="bpd2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="tel" class="form-control no-spin" min="0" id="bpd_gs" purpose="biometric" ga_dating="bpd2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose = "biometric" ga_dating="bpd2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose = "biometric" ga_dating="bpd2ga"></span></small>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="mr-2">OFD</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="ofd2ga"></select></div>
-                          <input type="number" class="form-control no-spin" min="0" id="ofd_mm" purpose="biometric" ga_dating="ofd2ga-input">
+                    <div class="form-group  mt-0 mb-1">
+                        <label class="mr-2  my-0">OFD</label>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="ofd2ga"></select></div>
+                          <input type="number" class="form-control no-spin" step="any" min="0" id="ofd_mm" purpose="biometric" ga_dating="ofd2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="tel" class="form-control no-spin" min="0" id="ofd_gs" purpose="biometric" ga_dating="ofd2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose="biometric" ga_dating="ofd2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose="biometric" ga_dating="ofd2ga"></span></small>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="mr-2">HC</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="hc2ga"></select></div>
-                          <input type="number" class="form-control no-spin" min="0" id="hc_mm"  purpose="biometric" ga_dating="hc2ga-input">
+                    <div class="form-group  mt-0 mb-1">
+                        <label class="mr-2  my-0">HC</label>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="hc2ga"></select></div>
+                          <input type="number" class="form-control no-spin" step="any" min="0" id="hc_mm"  purpose="biometric" ga_dating="hc2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="tel" class="form-control no-spin" min="0" id="hc_gs"  purpose="biometric" ga_dating="hc2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose="biometric" ga_dating="hc2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose="biometric" ga_dating="hc2ga"></span></small>
                     </div>
                   </div>
                   <div class="col-md-6">
-                    <div class="form-group">
-                        <label class="mr-2">Vp</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="vp2ga"></select></div>
-                          <input type="number" class="form-control no-spin" min="0" id="vp_mm"  purpose="biometric" ga_dating="vp2ga-input">
+                    <div class="form-group  mt-0 mb-1">
+                        <label class="mr-2  my-0">Vp</label>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="vp2ga"></select></div>
+                          <input type="number" class="form-control no-spin" step="any" min="0" id="vp_mm"  purpose="biometric" ga_dating="vp2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="tel" class="form-control" min="0" id="vp_gs"  purpose="biometric" ga_dating="vp2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose="biometric" ga_dating="vp2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose="biometric" ga_dating="vp2ga"></span></small>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md">
-                    <div class="form-group">
-                        <label class="mr-2">TCD</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="tcd2ga"></select></div>                    
-                          <input type="number" class="form-control no-spin" min="0" id="tcd_mm" purpose="biometric" ga_dating="tcd2ga-input">
+                    <div class="form-group  mt-0 mb-1">
+                        <label class="mr-2  my-0">TCD</label>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="tcd2ga"></select></div>                    
+                          <input type="number" class="form-control no-spin" step="any" min="0" id="tcd_mm" purpose="biometric" ga_dating="tcd2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="tel" class="form-control" min="0" id="tcd_gs" purpose="biometric" ga_dating="tcd2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose="biometric" ga_dating="tcd2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose="biometric" ga_dating="tcd2ga"></span></small>
                     </div>
                   </div>
                   <div class="col-md">
-                    <div class="form-group">
-                        <label class="mr-2">CM</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="cm2ga"></select></div>
-                          <input type="number" class="form-control no-spin" min="0" id="cm_mm"  purpose="biometric" ga_dating="cm2ga-input">
+                    <div class="form-group  mt-0 mb-1">
+                        <label class="mr-2  my-0">CM</label>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="cm2ga"></select></div>
+                          <input type="number" class="form-control no-spin" step="any" min="0" id="cm_mm"  purpose="biometric" ga_dating="cm2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="tel" class="form-control" min="0" id="cm_gs"  purpose="biometric" ga_dating="cm2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose="biometric" ga_dating="cm2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose="biometric" ga_dating="cm2ga"></span></small>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md">
-                    <div class="form-group">
-                        <label class="mr-2">NF</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="nf2ga"></select></div>
-                          <input type="number" class="form-control" min="0" id="nf_mm"  purpose="biometric" ga_dating="nf2ga-input">
+                    <div class="form-group  mt-0 mb-1">
+                        <label class="mr-2  my-0">NF</label>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="nf2ga"></select></div>
+                          <input type="number" class="form-control" min="0" step="any" id="nf_mm"  purpose="biometric" ga_dating="nf2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="number" class="form-control" min="0" id="nf_gs"  purpose="biometric" ga_dating="nf2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose="biometric" ga_dating="nf2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose="biometric" ga_dating="nf2ga"></span></small>
                     </div>
                   </div>
                   <div class="col-md">
-                    <div class="form-group">
-                        <label class="mr-2">NB</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="nb2ga"></select></div>
-                          <input type="number" class="form-control" min="0" id="nb_mm" purpose="biometric" ga_dating="nb2ga-input">
+                    <div class="form-group  mt-0 mb-1">
+                        <label class="mr-2  my-0">NB</label>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="nb2ga"></select></div>
+                          <input type="number" class="form-control" min="0" step="any" id="nb_mm" purpose="biometric" ga_dating="nb2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="number" class="form-control" min="0" id="nb_gs" purpose="biometric" ga_dating="nb2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose="biometric" ga_dating="nb2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose="biometric" ga_dating="nb2ga"></span></small>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md">
-                    <div class="form-group">
-                        <label class="mr-2">APAD</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="apad2ga"></select></div>
-                          <input type="number" class="form-control" min="0" id="apad_mm" purpose="biometric" ga_dating="apad2ga-input">
+                    <div class="form-group  mt-0 mb-1">
+                        <label class="mr-2  my-0">APAD</label>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="apad2ga"></select></div>
+                          <input type="number" class="form-control" min="0" step="any" id="apad_mm" purpose="biometric" ga_dating="apad2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="number" class="form-control" min="0" id="apad_gs" purpose="biometric" ga_dating="apad2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose="biometric" ga_dating="apad2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose="biometric" ga_dating="apad2ga"></span></small>
                     </div>
                   </div>
                   <div class="col-md">
-                    <div class="form-group">
-                        <label class="mr-1">TAD</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="tad2ga"></select></div>
-                          <input type="number" class="form-control" min="0" id="tad_mm" purpose="biometric" ga_dating="tad2ga-input">
+                    <div class="form-group  mt-0 mb-1">
+                        <label class="mr-1  my-0">TAD</label>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="tad2ga"></select></div>
+                          <input type="number" class="form-control" min="0" step="any" id="tad_mm" purpose="biometric" ga_dating="tad2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="number" class="form-control" min="0" id="tad_gs" purpose="biometric" ga_dating="tad2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose="biometric" ga_dating="tad2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose="biometric" ga_dating="tad2ga"></span></small>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md">
-                    <div class="form-group">
-                        <label class=" mr-2">AC</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="ac2ga"></select></div>
-                          <input type="number" class="form-control no-spin" min="0" id="ac_mm"  purpose="biometric" ga_dating="ac2ga-input">
+                    <div class="form-group mt-0 mb-1">
+                        <label class="mr-2 my-0">AC</label>
+                        <div class="input-group input-group-sm">
+                          <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="ac2ga"></select></div>
+                          <input type="number" class="form-control no-spin" step="any" min="0" id="ac_mm"  purpose="biometric" ga_dating="ac2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="tel" class="form-control" min="0" id="ac_gs"  purpose="biometric" ga_dating="ac2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose="biometric" ga_dating="ac2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose="biometric" ga_dating="ac2ga"></span></small>
                     </div>
                   </div>
                   <div class="col-md">
-                    <div class="form-group">
-                        <label class="mr-2">FL</label>
-                        <div class="input-group">
-                           <div class="input-group-prepend"><select class="form-control" purpose="biometric" ga_dating="fl2ga"></select></div>
-                          <input type="number" class="form-control no-spin" min="0" id="fl_mm"  purpose="biometric" ga_dating="fl2ga-input">
+                    <div class="form-group mt-0 mb-1">
+                        <label class="mr-2 my-0">FL</label>
+                        <div class="input-group input-group-sm">
+                           <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="fl2ga"></select></div>
+                          <input type="number" class="form-control no-spin" step="any" min="0" id="fl_mm"  purpose="biometric" ga_dating="fl2ga-input">
                           <div class="input-group-append"><span class="input-group-text">mm</span></div>
                           <input type="tel" class="form-control" min="0" id="fl_gs"  purpose="biometric" ga_dating="fl2ga-output">
                           <div class="input-group-append"><span class="input-group-text">с+д</span></div>
                         </div>
-                        <small><span class="form-text text-muted" purpose="biometric" ga_dating="fl2ga"></span></small>
+                        <small><span class="form-text text-muted mt-0" purpose="biometric" ga_dating="fl2ga"></span></small>
                     </div>
                   </div>
                 </div>
                 <div class="row">
                   <div class="col-md">
-                    <div class="form-group">
-                      <label class="mr-1">EFW</label>
-                      <div>
-                        <div class="input-group">
-                          <input type="number" class="form-control" min="0" id="efw_mm">
+                    <div class="form-group mt-0 mb-1">
+                      <label class="mr-1 my-0">EFW</label>
+                        <div class="input-group input-group-sm">
+                          <input type="number" class="form-control" step="any" min="0" id="efw_mm">
                           <div class="input-group-append"><span class="input-group-text">g</span></div>
                         </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md">
-                    <div class="form-group">
-                      <label class="mr-1">LA</label>
-                      <div>
-                        <div class="input-group">
-                          <input type="text" class="form-control" min="0" id="la" placeholder="текст">
-                        </div>
-                      </div>
                     </div>
                   </div>
                   <div class="col-md">
-                    <div class="form-group">
-                      <label class="mr-1">LC</label>
-                      <div>
-                        <div class="input-group">
-                          <input type="text" class="form-control" min="0" id="lc" placeholder="текст">
-                        </div>
-                      </div>
+                    <div class="form-group mt-0 mb-1">
+                      <label class="mr-1 my-0">LA</label>
+                      <div class="input-group input-group-sm"><input type="text" class="form-control" min="0" id="la"></div>
+                    </div>
+                  </div>
+                  <div class="col-md">
+                    <div class="form-group mt-0 mb-1">
+                      <label class="mr-1 my-0">LC</label>
+                        <div class="input-group input-group-sm"><input type="text" class="form-control" min="0" id="lc"></div>
                     </div>
                   </div>
                 </div>
                 <hr>
                 <p class="h5 text-center">Анатомия на плода</p>
-                <div class="form-group row ">
+                <div class="form-group row my-0">
                   <label class="col-md-2 col-form-label mr-1">Глава</label>
-                  <div class="col-md"><input type="text" class="form-control" id="head"></div>
+                  <div class="col-md"><input type="text" class="form-control form-control-sm" id="head"></div>
+                  <label class="col-md-2 col-form-label mr-1 text-md-right">Мозък</label>
+                  <div class="col-md"><input type="text" class="form-control form-control-sm" id="brain"></div>
                 </div>
-                <div class="form-group row ">
-                  <label class="col-md-2 col-form-label mr-1">Мозък</label>
-                  <div class="col-md"><input type="text" class="form-control" id="brain"></div>
-                </div>
-                <div class="form-group row ">
+                <div class="form-group row my-0">
                   <label class="col-md-2 col-form-label mr-1">Лице</label>
-                  <div class="col-md"><input type="text" class="form-control" id="face"></div>
+                  <div class="col-md"><input type="text" class="form-control form-control-sm" id="face"></div>
+                  <label class="col-md-2 col-form-label mr-1 text-md-right">Шия/Кожа</label>
+                  <div class="col-md"><input type="text" class="form-control form-control-sm" id="neck_skin"></div>
                 </div>
-                <div class="form-group row ">
-                  <label class="col-md-2 col-form-label mr-1">Шия/Кожа</label>
-                  <div class="col-md"><input type="text" class="form-control" id="neck_skin"></div>
-                </div>
-                <div class="form-group row ">
+                <div class="form-group row my-0">
                   <label class="col-md-2 col-form-label mr-1">Гръбначен стълб</label>
-                  <div class="col-md"><input type="text" class="form-control" id="spine"></div>
+                  <div class="col-md"><input type="text" class="form-control form-control-sm" id="spine"></div>
+                  <label class="col-md-2 col-form-label mr-1 text-md-right">Гръден кош</label>
+                  <div class="col-md"><input type="text" class="form-control form-control-sm" id="chest"></div>
                 </div>
-                <div class="form-group row ">
-                  <label class="col-md-2 col-form-label mr-1">Гръден кош</label>
-                  <div class="col-md"><input type="text" class="form-control" id="chest"></div>
-                </div>
-                <div class="form-group row ">
+                <div class="form-group row my-0">
                   <label class="col-md-2 col-form-label mr-1">Сърце</label>
-                  <div class="col-md"><input type="text" class="form-control" id="heart"></div>
+                  <div class="col-md"><input type="text" class="form-control form-control-sm" id="heart"></div>
+                  <label class="col-md-2 col-form-label mr-1 text-md-right">Корем</label>
+                  <div class="col-md"><input type="text" class="form-control form-control-sm" id="belly"></div>
                 </div>
-                <div class="form-group row ">
-                  <label class="col-md-2 col-form-label mr-1">Корем</label>
-                  <div class="col-md"><input type="text" class="form-control" id="belly"></div>
-                </div>
-                <div class="form-group row ">
+                <div class="form-group row my-0">
                   <label class="col-md-2 col-form-label mr-1">Бъбреци</label>
-                  <div class="col-md"><input type="text" class="form-control" id="kidney"></div>
+                  <div class="col-md"><input type="text" class="form-control form-control-sm" id="kidney"></div>
+                  <label class="col-md-2 col-form-label mr-1 text-md-right">Крайници</label>
+                  <div class="col-md"><input type="text" class="form-control form-control-sm" id="arms"></div>
                 </div>
-                <div class="form-group row ">
-                  <label class="col-md-2 col-form-label mr-1">Крайници</label>
-                  <div class="col-md"><input type="text" class="form-control" id="arms"></div>
-                </div>
-                <div class="form-group row ">
+                <div class="form-group row my-0">
                   <label class="col-md-2 col-form-label mr-1">Скелет</label>
-                  <div class="col-md"><input type="text" class="form-control" id="skeleton"></div>
+                  <div class="col-md-4"><input type="text" class="form-control form-control-sm" id="skeleton"></div>
                 </div>
                 <div class="row">
                   <div class="col-lg">
-                    <div class="form-group row ">
+                    <div class="form-group row my-0">
                       <label class="col-md-2 col-form-label pr-0">A. ut. Dex</label>
                       <div class="col-md">
-                        <div class="input-group">
+                        <div class="input-group input-group-sm">
                           <div class="input-group-prepend"><span class="input-group-text">PI</span></div>
-                          <input type="number" class="form-control" min="0" id="autdex_pi">
+                          <input type="number" class="form-control no-spin" min="0" id="autdex_pi">
                           <div class="input-group-prepend"><span class="input-group-text">RI</span></div>
-                          <input type="number" class="form-control" min="0" id="autdex_ri">
+                          <input type="number" class="form-control no-spin" min="0" id="autdex_ri">
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-lg">
-                    <div class="form-group row">
-                      <label class="col-md-2 col-form-label">A. ut. Sin</label>
+                    <div class="form-group row my-0">
+                      <label class="col-md-2 col-form-label pr-0">A. ut. Sin</label>
                       <div class="col-md">
-                        <div class="input-group">
+                        <div class="input-group input-group-sm">
                           <div class="input-group-prepend"><span class="input-group-text">PI</span></div>
                           <input type="number" class="form-control" min="0" id="autsin_pi">
                           <div class="input-group-prepend"><span class="input-group-text">RI</span></div>
@@ -442,10 +426,10 @@
                 </div>
                 <div class="row">
                   <div class="col-lg">
-                    <div class="form-group row ">
+                    <div class="form-group row my-0">
                       <label class="col-md-2 col-form-label ">A. umb.</label>
                       <div class="col-md">
-                        <div class="input-group">
+                        <div class="input-group input-group-sm">
                           <div class="input-group-prepend"><span class="input-group-text">PI</span></div>
                           <input type="number" class="form-control" min="0" id="aumb_pi">
                           <div class="input-group-prepend"><span class="input-group-text">RI</span></div>
@@ -455,14 +439,14 @@
                     </div>
                   </div>
                   <div class="col-lg">
-                    <div class="form-group row">
+                    <div class="form-group row my-0">
                       <label class="col-md-2 col-form-label">CMA</label>
                       <div class="col-md">
-                        <div class="input-group">
+                        <div class="input-group input-group-sm">
                           <div class="input-group-prepend"><span class="input-group-text">PI</span></div>
-                          <input type="number" class="form-control" min="0" id="cma_pi">
+                          <input type="number" class="form-control no-spin" min="0" id="cma_pi">
                           <div class="input-group-prepend"><span class="input-group-text">PSV</span></div>
-                          <input type="number" class="form-control" min="0" id="cma_psv">
+                          <input type="number" class="form-control no-spin" min="0" id="cma_psv">
                           <div class="input-group-append"><span class="input-group-text">mm/sec</span></div>
                         </div>
                       </div>
@@ -471,21 +455,19 @@
                 </div>
                 <div class="row">
                   <div class="col-lg">
-                    <div class="form-group row ">
+                    <div class="form-group row my-0">
                       <label class="col-md-2 col-form-label">CPR</label>
                       <div class="col-md">
-                        <div class="">
-                          <input type="number" class="form-control" min="0" id="cpr">
-                        </div>
+                          <input type="number" class="form-control form-control-sm no-spin" min="0" id="cpr">
                       </div>
                     </div>
                   </div>
                   <div class="col-lg">
-                    <div class="form-group row">
+                    <div class="form-group row my-0">
                       <label class="col-md-2 col-form-label pr-0 mr-1">Duc. Ven.</label>
                       <div class="col-md">
-                        <div class="input-group">
-                          <input type="number" class="form-control" min="0" id="duc_ven">
+                        <div class="input-group input-group-sm">
+                          <input type="number" class="form-control form-control-sm no-spin" min="0" id="duc_ven">
                           <div class="input-group-append"><span class="input-group-text">mm/sec</span></div>
                         </div>
                       </div>
@@ -494,7 +476,7 @@
                 </div>
                 <hr>
                 <p class="h5 text-center">Коментар</p>
-                <div class="col-md"><input type="text" class="form-control" id="comment"></div>
+                <div class="col-md"><input type="text" class="form-control form-control-sm" id="comment"></div>
                 <hr>
                 <p class="h6 text-center">Забележка</p>
                 <ul>
@@ -697,12 +679,12 @@
           $("input#gv_po_prm_weeks").val(gv_weeks);
           $("input#gv_po_prm_days").val(gv_days);
           $("input#vtr").val(vtr_date.format("YYYY-MM-DD"));
-          console.log("weeks", gv_weeks);
-          console.log("days", gv_days);
-          console.log("vtr", vtr_date.format());
+          //console.log("weeks", gv_weeks);
+          //console.log("days", gv_days);
+          //console.log("vtr", vtr_date.format());
         }
         else{
-          console.log("invalid date");
+          console.log("user entered invalid date");
           $("input#gv_po_prm_weeks").val("");
           $("input#gv_po_prm_days").val("");
         }
@@ -734,7 +716,7 @@
             localStorage.setItem(ga_dating_id, f);
           } else {
             // Sorry! No Web Storage support..
-            console.log("Web Storage not supported...");
+            console.warn("Web Storage not supported...");
           }
           
           doBiometricCalc(ga_dating_id);
@@ -759,7 +741,9 @@
       function doBiometricCalc(ga_dating_id){
           var m = $("input[purpose='biometric'][ga_dating='"+ga_dating_id+"-input']").val();
           var f = $("select[purpose='biometric'][ga_dating='"+ga_dating_id+"']").val();
-          $("input[purpose='biometric'][ga_dating='"+ga_dating_id+"-output']").val(ga_dating_functions[ga_dating_id][f].calc(m));        
+          var r = ga_dating_functions[ga_dating_id][f].calc(m);
+          if (r != undefined && r!= null)
+            $("input[purpose='biometric'][ga_dating='"+ga_dating_id+"-output']").val(ga_dating_functions[ga_dating_id][f].calc(m));        
       }
     
       $("#bpd_mm").keyup(function(){
@@ -802,7 +786,10 @@
     function generateItemObject(form_id){
       var patientData = {};
       
-      patientData.patientName = {S:$("form#"+form_id+" input#patient_name").val().toUpperCase()+" - "+$("form#"+form_id+" input#patient_egn").val()+"<br>"+form_id+" on " + (new moment()).format("YYYY-MM-DD")};
+      patientData.patientName = {S:$("form#"+form_id+" input#patient_name").val().toUpperCase()+" - "+
+                                 $("form#"+form_id+" input#patient_egn").val()+"<br>"+
+                                 $("a.nav-item#"+form_id).text() + " on " + 
+                                 (new moment()).format("YYYY-MM-DD")};
       patientData.ttl = {N:(new moment()).add(patientRetentionPeriod, 'y').unix()+""};
       patientData.examType = {S:form_id};
       patientData.examData = {M:{}};
@@ -817,9 +804,7 @@
     }
     
     $("button[save]").click(function() {
-
       savePatientInfo(true /*overwrite protect*/);
-      
     });
     
     function savePatientInfo(overwriteProtect) {
@@ -867,11 +852,16 @@
     
     $("button[print]").click(function(){
       window.print();
-    })
+    });
+    
+    function newPatient(){
+      $("div.tab-pane.active input").val("");
+      $("input#date_uzi").val(new moment().format("YYYY-MM-DD"));
+    }
     
     $("button[new]").click(function(){
-      $("div.tab-pane.active input").val("");
-    })
+      newPatient();
+    });
     
     $("button[access]").click(function(){
       var secretAccessKey = $("input#secretAccessKey").val();
@@ -881,20 +871,19 @@
         localStorage.setItem("secretAccessKey", secretAccessKey);
         localStorage.setItem("accessKeyId", accessKeyId);
       }
-    })
+    });
     
     $("input#patientSearchPrefix").keyup(function(e){
-      
       if (e.which == 13) { //Enter pressed
         var s = $(this).val();
         if (s.length >= 0)
           propagatePatientList();
       }
-    })
+    });
     
     $(function(){
-
       propagatePatientList();
+      newPatient();
     });
     
   </script>
