@@ -86,8 +86,8 @@
                     <input type="date" class="form-control" id="prm">
                   </div>
                   <div class="form-group col-md">
-                    <label for="date_uzi">Дата УЗИ</label>
-                    <input type="date" class="form-control" id="date_uzi">
+                    <label for="exam_date">Дата УЗИ</label>
+                    <input type="date" class="form-control" id="exam_date">
                   </div>
                   <div class="form-group col-md">
                     <label for="gv_po_prm">ГВ по ПРМ</label>
@@ -652,7 +652,8 @@
         showInfo("Грешка", "Неизвестен тип данни");
         return;        
       }
-
+      
+      form.find("input").val(""); //clear old data from all input fields before populatig data
       for (key in examData){
         console.debug (key, examData[key].S);
         form.find("input#"+key).val(examData[key].S);
@@ -666,27 +667,27 @@
     //calculate gestatational age of the baby
     function calculate_gv(){
         var today = new moment();
-        var uzi_date = moment($("input#date_uzi").val());
+        var uzi_date = moment($("form#uzd input#exam_date").val());
         if (!uzi_date.isValid())
             uzi_date = new moment();
-        var prm_date = moment($("input#prm").val());
+        var prm_date = moment($("form#uzd input#prm").val());
         if (prm_date.isValid() && prm_date <= uzi_date)
         {
           var gv=moment.duration(uzi_date.diff(prm_date));
           var gv_weeks=uzi_date.diff(prm_date, "weeks");
           var gv_days=uzi_date.diff(prm_date, "days")-7*gv_weeks;
           var vtr_date = prm_date.add(280, "d");//.add(9, "M");
-          $("input#gv_po_prm_weeks").val(gv_weeks);
-          $("input#gv_po_prm_days").val(gv_days);
-          $("input#vtr").val(vtr_date.format("YYYY-MM-DD"));
+          $("form#uzd input#gv_po_prm_weeks").val(gv_weeks);
+          $("form#uzd input#gv_po_prm_days").val(gv_days);
+          $("form#uzd input#vtr").val(vtr_date.format("YYYY-MM-DD"));
           //console.log("weeks", gv_weeks);
           //console.log("days", gv_days);
           //console.log("vtr", vtr_date.format());
         }
         else{
           console.log("user entered invalid date");
-          $("input#gv_po_prm_weeks").val("");
-          $("input#gv_po_prm_days").val("");
+          $("form#uzd input#gv_po_prm_weeks").val("");
+          $("form#uzd input#gv_po_prm_days").val("");
         }
       }
       
@@ -746,39 +747,39 @@
             $("input[purpose='biometric'][ga_dating='"+ga_dating_id+"-output']").val(ga_dating_functions[ga_dating_id][f].calc(m));        
       }
     
-      $("#bpd_mm").keyup(function(){
+      $("form#uzd #bpd_mm").keyup(function(){
         calcHC();
       });
                          
-      $("#bpd_mm").change(function(){
+      $("form#uzd #bpd_mm").change(function(){
         calcHC();
       });
       
-      $("#ofd_mm").keyup(function(){
+      $("form#uzd #ofd_mm").keyup(function(){
         calcHC();
       });
                          
-      $("#ofd_mm").change(function(){
+      $("form#uzd #ofd_mm").change(function(){
         calcHC();
       });
                          
       function calcHC(){
-        var bpd = parseFloat($("#bpd_mm").val());
-        var ofd = parseFloat($("#ofd_mm").val());
+        var bpd = parseFloat($("form#uzd #bpd_mm").val());
+        var ofd = parseFloat($("form#uzd #ofd_mm").val());
         var hc = 3.14*(bpd+ofd)/2.0;
         if (!Number.isNaN(hc)){
-          $("#hc_mm").val(Math.round(hc*100.0)/100.0);
-          $("#hc_mm").change();
+          $("form#uzd #hc_mm").val(Math.round(hc*100.0)/100.0);
+          $("form#uzd #hc_mm").change();
         }
         else 
-          $("#hc_mm").val("");
+          $("form#uzd #hc_mm").val("");
       }
     
-      $("input#prm").change(function(){
+      $("form#uzd input#prm").change(function(){
           calculate_gv();
       });
       
-      $("input#date_uzi").change(function(){
+      $("form#uzd input#exam_date").change(function(){
           calculate_gv();
       });
        
@@ -789,7 +790,8 @@
       patientData.patientName = {S:$("form#"+form_id+" input#patient_name").val().toUpperCase()+" - "+
                                  $("form#"+form_id+" input#patient_egn").val()+"<br>"+
                                  $("a.nav-item#"+form_id).text() + " on " + 
-                                 (new moment()).format("YYYY-MM-DD")};
+                                 $("form#"+form_id+" input#exam_date").val()};
+                                 //(new moment()).format("YYYY-MM-DD")};
       patientData.ttl = {N:(new moment()).add(patientRetentionPeriod, 'y').unix()+""};
       patientData.examType = {S:form_id};
       patientData.examData = {M:{}};
@@ -814,8 +816,8 @@
       var patient_name = $("form#"+form_id+" input#patient_name").val();
       var patient_egn = $("form#"+form_id+" input#patient_egn").val();
       
-      if (patient_name.length == 0 || patient_egn.length == 0) {
-        showInfo("Липсваща информация.", "Моля въведете име на пациент и ЕГН!")
+      if (patient_name.length == 0){// || patient_egn.length == 0) {
+        showInfo("Липсваща информация.", "Моля въведете име на пациент!")
         //alert("Моля въведете име на пациент!");
         return;
       }
@@ -856,7 +858,7 @@
     
     function newPatient(){
       $("div.tab-pane.active input").val("");
-      $("input#date_uzi").val(new moment().format("YYYY-MM-DD"));
+      $("input#exam_date").val(new moment().format("YYYY-MM-DD"));
     }
     
     $("button[new]").click(function(){
