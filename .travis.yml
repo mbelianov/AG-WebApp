@@ -1,0 +1,8 @@
+deploy:
+  provider: s3
+  access_key_id: ""
+  secret_access_key: ""
+  bucket: "webapp.arabadjikova.com"
+  skip_cleanup: true
+  acl: public_read
+  local_dir: src
