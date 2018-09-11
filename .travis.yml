@@ -3,7 +3,7 @@ deploy:
   access_key_id: AKIAJEZI54MGUVYQR64Q
   secret_access_key:
     secure: B86NfsJhyxL3PMrkBNtCVjuHj+icLeNhD0DBQZKhieXPqgWEMzbJM+za2XqlBmaH89Yp2UKmDa2Rv5DrmZrWzJsWck2ZITIffJu5JU0g5CIyLQgaGWHlqvS7e6fXrYG08t63CF2+5Tpx44bXl3JmpaFKf0Dk7QbfQv5iO9bdhcNy7m4PpRPigOXv4H/ddnqE9x5zptcvCCRbWGynlzEABiJNneNfEMoXyAfWtywtfDnFAVUGY0OcJ6IaDiEj2KfEE/8I2smCfHiHUtSDfiqB6YTz/2j0Jn83yTMsN1NOYf1KHBWC3cgkPrMTh0VTMK+NLy+ahARHGAF/kG+9+nQhZ0zpC+/oPil9aEvPuKUelR2dzW2xk+1CDvKwI+t15oI8fM/yeZ18tAaH4arF/W8RYsgg6sLVWDnmRsltcKIpoOp0fQGGKPd36xgr73tDokYH2+to+e3u3lIpNoVL2ciuik6nJntxqI2P3nDy4U+rFpaRWIOCxjBV6j+lP7KMccf9Vq5EY3v+g/LDpQlfEt0yi9PbBTwrCwS8TNWO0K0HINcWW3f42us/3UMB3n/lBBI9R98M/nNc+qgn63HqOeOWmD1w0YSWF7OeyHVfvMGYPhPu74reVRGJ4Kk0KBbq0qjxOjpHa0o6aO+h3Xzy1C7YaD9LNnbAjimjFSXMGapwyUA=
-  bucket: webapp.arabadjikova.com
+  bucket: webapp-pre.arabadjikova.com
   skip_cleanup: true
   acl: public_read
   local_dir: src
