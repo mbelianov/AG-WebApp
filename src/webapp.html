@@ -10,17 +10,51 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
   <style>
+      
+    body, html {
+        margin: 0;
+        overflow: hidden;
+        height:100%;
+      }
+    
     .no-spin::-webkit-inner-spin-button,
     .no-spin::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }   
     
+    @media print {
+      body, html {
+        height: auto;
+        overflow: visible;
+      }
+      body * {
+        visibility: hidden;
+      }
+      
+      div.tab-pane.active, div.tab-pane.active * {
+        visibility: visible;
+      }
+      
+/*******************************************      
+      div.tab-pane.active{
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+********************************************/       
+      form {
+        height: auto;
+      }
+     
+    }
+    
     @page {
       size: A3;
       margin-top: 2cm;
       margin-bottom: 2cm;
-    }    
+    } 
+
   </style>
   <title>Д-р Арабаджикова</title>
 </head>
@@ -42,24 +76,25 @@
   <div class="container-fluid">
     <div class = "row">
       <div class = "col-3 flex-column d-none d-lg-flex d-print-none border">
-        <div class="d-flex justify-content-around mt-3">
-          <button type="button" class="btn btn-primary w-25" new>Нов</button>
-          <button type="button" class="btn btn-primary w-25" save>Запис</button>
+        <div listHeader>
+          <div class="d-flex justify-content-left mt-3" buttonsbar2>
+            <button type="button" class="btn btn-primary" new>Нов</button>
+            <!--<button type="button" class="btn btn-primary w-25" save>Запис</button>-->
+          </div>
+          <hr class="mx-0">
+          <label>Търсене</label>
+          <input class = "form-control" type="text" id="patientSearchPrefix">
+          <hr class="mx-0">
         </div>
-        <hr class="mx-0">
-        <label>Търсене</label>
-        <input class = "form-control" type="text" id="patientSearchPrefix">
-        <hr class="mx-0">
-        <div class="list-group" id="patientList">          
-        </div>
+        <div class="list-group" id="patientList"></div>
       </div>  
       <div class = "col border">
-        <div class="tab-content mt-3">
+        <div class="tab-content mt-0">
           <div class="tab-pane fade show active" id="nav-uzd" role="tabpanel">
             <div class="container d-flex flex-column px-0">              
-              <p class="h2 text-center">Ултразвукова Пренатална Диагностика</p>
-              <hr>
-              <form class="mb-5" id="uzd">
+              <form class="mb-0 px-3" id="uzd">        
+                <p class="h2 text-center mt-1">Ултразвукова Пренатална Диагностика</p>
+                <hr>                
                 <div class="form-row">
                   <div class="form-group col-md-8">
                     <label for="patient_name">Пациент</label>
@@ -483,11 +518,11 @@
                   <li class="pb-0 mb-0"><small>Някои вродени аномалии на плода не могат да бъдат диагностицирани при ултразвуково изследване.</small></li>
                   <li class="pt-0 mt-0"><small>Хромозомните аномалии на плода не могат да се диагностицират чрез ултразвук.</small></li>
                 </ul>
-                <div class="d-flex justify-content-around">
-                  <button type="button" class="btn btn-lg btn-primary w-50 m-1 d-print-none" save>Запис</button>
-                  <button type="button" class="btn btn-lg btn-primary w-50 m-1 d-print-none" print>Печат</button>
-                </div>
               </form>
+              <div class="d-flex justify-content-around my-3" buttonsbar1>
+                <button type="button" class="btn btn-lg btn-primary w-50 m-1 d-print-none" save>Запис</button>
+                <button type="button" class="btn btn-lg btn-primary w-50 m-1 d-print-none" print>Печат</button>
+              </div>
             </div>
           </div>
           <div class="tab-pane fade" id="nav-admin" role="tabpanel">
@@ -507,7 +542,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  Д-р Арабаджикова v1.1.0<br>
+                  Д-р Арабаджикова v1.2.0<br>
                   BelianovSoft &copy 2018
                 </div>
                 <div class="modal-footer">
@@ -521,7 +556,7 @@
     </div>
   </div>
   
-  <div class="modal fade" tabindex="-1">
+  <div class="modal fade" id="modalInfo" tabindex="-1">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
@@ -553,7 +588,7 @@
           });
         });
       }
-      $("div.modal").modal('show');
+      $("div.modal#modalInfo").modal('show');
     }
   </script>
   
@@ -874,7 +909,13 @@
     };
     
     $("button[print]").click(function(){
+      var h = $("form").css("height"); //temporary store the height property
+      
+      $("form").css("height","");
+      
       window.print();
+      
+      $("form").css("height",h);
     });
     
     function newPatient(){
@@ -904,12 +945,30 @@
       }
     });
     
+    
+    function setupScrollers (){
+      //sets up individual scrollers for left and right panes
+      var navbar_outer_height = $("nav.navbar").outerHeight(true);
+      var buttonsbar_outer_height = $("div[buttonsbar1]").outerHeight(true);
+      var listHeader_outer_heigth = $("div[listHeader]").outerHeight(true);
+
+      var offset = navbar_outer_height+buttonsbar_outer_height;
+      $("form").css("height","calc(100vh - "+offset+"px");
+      $("form").css("overflow-y","auto");
+      
+      offset = navbar_outer_height+listHeader_outer_heigth+10;
+      $("div.list-group").css("height","calc(100vh - "+offset+"px");
+      $("div.list-group").css("overflow-y","auto");
+      
+    }
+    
+    
     $(function(){
       propagatePatientList();
       newPatient();
+      setupScrollers();
     });
     
   </script>
 </body>
-
 </html>
