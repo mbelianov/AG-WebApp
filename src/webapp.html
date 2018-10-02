@@ -1,7 +1,5 @@
 <!doctype html>
 <html lang="bg-BG">
-  
-
 <head>
   <!-- Required meta tags -->
   <meta charset="utf-8">
@@ -78,8 +76,8 @@
       <div class = "col-3 flex-column d-none d-lg-flex d-print-none border">
         <div listHeader>
           <div class="d-flex justify-content-left mt-3" buttonsbar2>
-            <button type="button" class="btn btn-primary" new>Нов</button>
-            <!--<button type="button" class="btn btn-primary w-25" save>Запис</button>-->
+            <button type="button" class="btn btn-primary mx-1" new>Нов</button>
+            <button type="button" class="btn btn-primary mx-1" logout>Изход</button>
           </div>
           <hr class="mx-0">
           <label>Търсене</label>
@@ -542,8 +540,12 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  Д-р Арабаджикова v1.2.0<br>
-                  BelianovSoft &copy 2018
+                  <p>Д-р Арабаджикова v1.3.0<br>
+                  BelianovSoft &copy 2018</p>
+                  <p>
+                    Change log:<br>
+                    v1.3.0 - Access to patient data is now with username and password
+                  </p>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -556,6 +558,7 @@
     </div>
   </div>
   
+  <!-- gerneral purpose modal dialog for showing info messages-->
   <div class="modal fade" id="modalInfo" tabindex="-1">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -574,21 +577,64 @@
   </div>
   <script>
     function showInfo(title, content, callback = null){
-      $("h5.modal-title").html(title);
-      $("div.modal-body p").html(content);
-      $("div.modal div.modal-footer").html("");
-      $("div.modal").off("hidden.bs.modal");
-      $("div.modal div.modal-footer").append('<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" close>Close</button>');
+      $("div.modal#modalInfo h5.modal-title").html(title);
+      $("div.modal#modalInfo div.modal-body p").html(content);
+      $("div.modal#modalInfo div.modal-footer").html("");
+      $("div.modal#modalInfo").off("hidden.bs.modal");
+      $("div.modal#modalInfo div.modal-footer").append('<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal" close>Close</button>');
       if (callback && typeof callback == 'function'){
-        $("div.modal div.modal-footer").append('<button type="button" class="btn btn-primary btn-sm" ok>OK</button>');
-        $("div.modal div.modal-footer button[ok]").click(function(){
-          $("div.modal").modal('hide');
-          $("div.modal").one("hidden.bs.modal", function(){
+        $("div.modal#modalInfo div.modal-footer").append('<button type="button" class="btn btn-primary btn-sm" ok>OK</button>');
+        $("div.modal#modalInfo div.modal-footer button[ok]").click(function(){
+          $("div.modal#modalInfo").modal('hide');
+          $("div.modal#modalInfo").one("hidden.bs.modal", function(){
              callback();
           });
         });
       }
       $("div.modal#modalInfo").modal('show');
+    }
+  </script>
+  
+  <!--Login modal dialog -->
+  <div class="modal fade" id="modalLogin" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Log-in Dialog</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+              <label for="user-name" class="col-form-label">User:</label>
+              <input type="text" class="form-control" id="user-name">
+            </div>
+            <div class="form-group">
+              <label for="password" class="col-form-label">Password:</label>
+              <input type="password" class="form-control" id="password"></input>
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" ok>Log-in</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function requestUserLoginInfo(cb_dynamoDB_op /*DynamoDB operation to be executed as callback after login*/){
+      //clear the password field to show the user we do not like his password
+      $("div.modal#modalLogin input#password").val("");
+      $("div.modal#modalLogin div.modal-footer button[ok]").one("click", function(){
+          $("div.modal#modalLogin").modal('hide');
+          $("div.modal#modalLogin").one("hidden.bs.modal", function(){
+             executeDdbOperation(cb_dynamoDB_op);
+          });
+        });
+      $("div.modal#modalLogin").modal("show");
+    
     }
   </script>
   
@@ -599,27 +645,40 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.203.0.min.js"></script>
-	<script src="http://lozen.arabadjikova.com/tempmon/js/SigV4Utils.js"></script>
+	<!--<script src="http://lozen.arabadjikova.com/tempmon/js/SigV4Utils.js"></script>-->
   <script src="ga_dating_functions.js"></script>
+  <script src="amazon-cognito-identity.js"></script>
   
   <script>
 		AWS.config.update({region: "us-east-1"});//, dynamoDbCrc32: false});
-		//AWS.config.update({accessKeyId: 'AKIAIHSDHBVHCBPCIQ3A', secretAccessKey: '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'});
+		//AWS.config.update({accessKeyId: '', secretAccessKey: ''});
     
     var patientRetentionPeriod = 10; //years
     var accessKeyId = localStorage.getItem("accessKeyId");
     var secretAccessKey = localStorage.getItem("secretAccessKey");
+    var poolData = { 
+        UserPoolId : 'us-east-1_njMWzfgEG',
+        ClientId : '2p3alhctu4e6d4fkunpctc8qd'
+      };
+    var credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'us-east-1:0ee125bb-925d-4880-9623-109b25e17574',
+        Logins: {
+          'cognito-idp.us-east-1.amazonaws.com/us-east-1_njMWzfgEG': ''
+        }
+    });
+    //will be used to properly handle authenitacation flow
+    //true, means that refreshng credential is not possible
+    var credentialsRefreshFailed = true;
     
-    function getDynamoDB(){
-      var dynamodb = new AWS.DynamoDB({
-        apiVersion: '2012-08-10',
-        dynamoDbCrc32: false,
-        accessKeyId: accessKeyId,
-        secretAccessKey: secretAccessKey
-      });        
-      
-      return dynamodb;
-    }
+//     function getDynamoDB(){
+//       var dynamodb = new AWS.DynamoDB({
+//           apiVersion: '2012-08-10',
+//           dynamoDbCrc32: false,
+//           accessKeyId: accessKeyId,
+//           secretAccessKey: secretAccessKey
+//         });          
+//       return dynamodb;
+//     }
     
     function propagatePatientList(){
       $("div#patientList").html("");
@@ -627,7 +686,6 @@
     }
     
     function readPatientDB(start_key){
-      var ddb = getDynamoDB();
       
       var params = {
         TableName: "patientDDB",
@@ -648,29 +706,31 @@
       if (start_key != undefined)
         params.ExclusiveStartKey = start_key;
       
-      ddb.scan(params, function(err, data){
-           if (err) console.warn(err, err.stack); // an error occurred
-           else {
-             console.debug(data);           // successful response
-             data.Items.forEach(function (item){
-               $("div#patientList").append('<a href="#" class="list-group-item list-group-item-action py-0" data-toggle="list">'+item.patientName.S+'</a>');
-             });
-             
-             //by default resul set from scan operation is limited to only fist 25 items.
-             //uncomment following line to get all the item from the scan operations
-             //if (data.LastEvaluatedKey != undefined) readPatientDB(data.LastEvaluatedKey); else 
-             
-             //once we are done, hook up event listener on every list item
-                $("div#patientList a").click(function(e){
-                  e.preventDefault();
-                  patientListItemClickedHandler($(this).html());
-                });
-           }
+      executeDdbOperation(function(ddb){
+        ddb.scan(params, function(err, data){
+             if (err) console.warn(err, err.stack); // an error occurred
+             else {
+               console.debug(data);           // successful response
+               data.Items.forEach(function (item){
+                 $("div#patientList").append('<a href="#" class="list-group-item list-group-item-action py-0" data-toggle="list">'+item.patientName.S+'</a>');
+               });
+
+               //by default resul set from scan operation is limited to only fist 25 items.
+               //uncomment following line to get all the item from the scan operations
+               //if (data.LastEvaluatedKey != undefined) readPatientDB(data.LastEvaluatedKey); else 
+
+               //once we are done, hook up event listener on every list item
+                  $("div#patientList a").click(function(e){
+                    e.preventDefault();
+                    patientListItemClickedHandler($(this).html());
+                  });
+             }
+        });
       });
     }
     
     function patientListItemClickedHandler(patientId){
-      var ddb = getDynamoDB();
+      
       var params = {
         TableName: "patientDDB",
         Key: {
@@ -678,13 +738,15 @@
         }
       }
       
-      ddb.getItem(params, function(err, data){
-          if (err) console.warn(err, err.stack); // an error occurred
-          else {
-            console.debug(data);           // successful response
-            visualizeExamData(data);
-          }
-      })
+      executeDdbOperation(function (ddb){
+        ddb.getItem(params, function(err, data){
+            if (err) console.warn(err, err.stack);  // an error occurred
+            else {
+              console.debug(data);                  // successful response
+              visualizeExamData(data);
+            }
+        });
+      });
     }
     
     function visualizeExamData(data){
@@ -717,9 +779,7 @@
       
       
     }
-  
-
-    
+      
     //calculate gestatational age of the baby
     function calculate_gv(){
         var today = new moment();
@@ -873,7 +933,7 @@
       var patient_egn = $("form#"+form_id+" input#patient_egn").val();
       
       if (patient_name.length == 0){// || patient_egn.length == 0) {
-        showInfo("Липсваща информация.", "Моля въведете име на пациент!")
+        showInfo("Липсваща информация", "Моля въведете име на пациент!")
         //alert("Моля въведете име на пациент!");
         return;
       }
@@ -890,31 +950,31 @@
       //params.ReturnValues = "ALL_OLD";
       
       $("button[save]").prop("disabled", true);
-      var dynamodb = getDynamoDB();      
-      dynamodb.putItem(params, function(err, data){
-        $("button[save]").prop("disabled", false);
-        if (err){
-          console.warn("Error writing data in DB. error.code => ", err.code);
-          if (err.code == "ConditionalCheckFailedException")
-            showInfo("Внимание", "Вероятно дублиран запис.<br>Да продължа ли?", function(){ savePatientInfo(false /*no overwrite protect*/);});
-          else
-            showInfo("Грешка", "Грешка при запис!");
-        }
-        else{
-          console.log("Data succesfully logged in DB", data);
-          showInfo("Информация", "Успешен запис!");
-        }
-        
-      })
+       
+      executeDdbOperation(function(ddb){
+        ddb.putItem(params, function(err, data){
+          $("button[save]").prop("disabled", false);
+          if (err){
+            console.warn("Error writing data in DB. error.code => ", err.code);
+            if (err.code == "ConditionalCheckFailedException")
+              showInfo("Внимание", "Вероятно дублиран запис.<br>Да продължа ли?", 
+                       function(){ savePatientInfo(false /*no overwrite protect*/);});
+            else
+              showInfo("Грешка", "Грешка при запис!");
+          }
+          else{
+            console.log("Data succesfully logged in DB", data);
+            showInfo("Информация", "Успешен запис!");
+          }
+
+        });
+      });
     };
     
     $("button[print]").click(function(){
-      var h = $("form").css("height"); //temporary store the height property
-      
-      $("form").css("height","");
-      
-      window.print();
-      
+      var h = $("form").css("height"); //temporary store the height property      
+      $("form").css("height","");      
+      window.print();      
       $("form").css("height",h);
     });
     
@@ -926,6 +986,15 @@
     $("button[new]").click(function(){
       newPatient();
     });
+    
+    $("button[logout]").click(function(){
+      var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+      var cognitoUser = userPool.getCurrentUser();
+      
+      if (cognitoUser != null){
+        cognitoUser.signOut();
+      }
+    })
     
     $("button[access]").click(function(){
       var secretAccessKey = $("input#secretAccessKey").val();
@@ -962,11 +1031,186 @@
       
     }
     
+    //Executes DynamoDB operation passed as argument. 
+    //If needed user is asked for credentials
+    function executeDdbOperation(op){
+      console.debug("Start executing DynamoDB operation...");
+      var userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+      var dynamodb = new AWS.DynamoDB({
+            apiVersion: '2012-08-10',
+            dynamoDbCrc32: false,
+            credentials: credentials,
+          }); 
+      
+      if (credentials.needsRefresh()){
+        console.log("Existing AWS credentials needs to be refreshed!");
+        if (credentialsRefreshFailed)
+          startAutheticationFlow();
+        else{
+          console.debug("Initiating AWS credentials refresh operation...");
+          credentials.refresh((error) => {
+              if (error) {
+                console.error("Unable to refresh AWS credentials. Error: ", error);
+                user.signOut();
+                credentialsRefreshFailed = true;
+                requestUserLoginInfo(op)
+              } 
+              else {
+                console.debug('AWS credentials succesfully refreshed: ', credentials);
+                credentialsRefreshFailed = false;
+                if (op) op(dynamodb);
+
+              }
+          }); 
+        }
+      }
+      else 
+        //credentials seems valid, so execute requested dynamodb operation
+        if (op) op(dynamodb);
+      
+      function startAutheticationFlow(){  
+        console.debug("Tring to get current user from local browser storage...");
+        var cognitoUser = userPool.getCurrentUser();
+
+        if (cognitoUser == null)
+          authenticateUser(userPool);
+        else{
+          console.debug("User succesfully retreived from local storage", cognitoUser);
+          getAWSCredentials(cognitoUser);
+        }
+      }
+
+      function authenticateUser(userPool){
+        console.debug("No logged user found in local storage.");
+        console.debug("User needs to enter his username and password...");
+        
+          var password = $("div.modal#modalLogin input#password").val();
+          var user = $("div.modal#modalLogin input#user-name").val();
+          
+          if (password.length == 0){
+              //we do not know the user password so ask for it.
+              //pass as a parameter the intended DynamoDB operation 
+              //After user enters his password we will try to execute it again.
+              requestUserLoginInfo(op);
+              return;
+          }
+          var authenticationData = {
+                  Username : user,
+                  Password : password,
+              };
+          var authenticationDetails = new AmazonCognitoIdentity.AuthenticationDetails(authenticationData);
+
+          var userData = {
+                  Username : authenticationData.Username,
+                  Pool : userPool
+              };
+
+          var cognitoUser = new AmazonCognitoIdentity.CognitoUser(userData);
+          //as we authenitcate new user, we clear any cached identities, just in case...
+          credentials.clearCachedId();
+        
+          console.debug ("Authenticating new username and password");
+        
+          cognitoUser.authenticateUser(authenticationDetails, {
+            onSuccess: function (result) {
+              console.debug("User succesfully authenticated!", result);
+              var idToken = result.idToken.jwtToken;
+              credentials.params.Logins['cognito-idp.us-east-1.amazonaws.com/us-east-1_njMWzfgEG'] = 
+                    idToken;
+              console.debug("Requesting new AWS credentials...")
+              credentials.get(function(error){
+                    if (error) {
+                      console.error("Requesting AWS credentials failed. Error: ", error);
+                      cognitoUser.signOut();
+                      credentialsRefreshFailed = true;
+                      requestUserLoginInfo(op)
+                    } 
+                    else {
+                      console.debug('AWS credentials succesfully obtained: ', credentials);
+                      credentialsRefreshFailed = false;
+                      if (op) op(dynamodb);
+                    }
+                });
+
+              //var accessToken = result.getAccessToken().getJwtToken();
+              /* Use the idToken for Logins Map when Federating User Pools with identity pools or when passing through an Authorization Header to an API Gateway Authorizer */
+              //var idToken = result.idToken.jwtToken;
+            },
+            newPasswordRequired: function(userAttributes, requiredAttributes) {
+              console.debug("New user. Password needs to be confirmed.");
+                // User was signed up by an admin and must provide new 
+                // password and required attributes, if any, to complete 
+                // authentication.
+
+                // userAttributes: object, which is the user's current profile. It will list all attributes that are associated with the user. 
+                // Required attributes according to schema, which don’t have any values yet, will have blank values.
+                // requiredAttributes: list of attributes that must be set by the user along with new password to complete the sign-in.
+
+                // Get these details and call 
+                // newPassword: password that user has given
+                // attributesData: object with key as attribute name and value that the user has given.
+                var attributesData = {};
+                var newPassword = password;
+                cognitoUser.completeNewPasswordChallenge(newPassword, attributesData, this);
+            },        
+            onFailure: function(err) {
+              console.log("User authentication failure:", err.message, err);
+              //showInfo("Грешка", "Грешка при оторизация.<br>Въведохте ли вярна парола?");
+              //user have entered wrong password. clear it and re-attempt to execute to op again
+              requestUserLoginInfo(op);
+            }
+          });
+        }
+
+      function getAWSCredentials(user){
+
+          if (user != null) {
+            user.getSession(function(err, session) {
+              if (session && session.isValid()) {
+                console.debug('Valid user session was retrieved:');
+                console.debug("session: ", session);
+
+                credentials.params.Logins['cognito-idp.us-east-1.amazonaws.com/us-east-1_njMWzfgEG'] = 
+                    session.getIdToken().getJwtToken();
+                
+                //call refresh method in order to authenticate user and get new temp credentials
+                
+                console.log("Refreshing AWS credentials for the retrieved user session...");
+                credentials.refresh((error) => {
+                    if (error) {
+                      console.error("Unable to refresh AWS credentials. Error: ", error);
+                      user.signOut();
+                      credentialsRefreshFailed = true;
+                      requestUserLoginInfo(op)
+                    } 
+                    else {
+                      console.debug('AWS credentials succesfully refreshed: ', credentials);
+                      credentialsRefreshFailed = false;
+                      if (op) op(dynamodb);
+                    }
+                });
+              }
+              else {//(session && session.isValid())
+                console.error("Unable to retrieve user session for user: ", user);
+                console.error("following error occurred", err);
+                //showInfo("Грешка", "Възникна грешка.<br>Презаредете страницата и опитайте отново!")
+                user.signOut();
+                requestUserLoginInfo(op)
+              }
+            });
+          }
+          else { //(user != null)
+            console.error("Unrecoverable error. Unable to retrieve user session for null user");
+            showInfo("Грешка", "Възникна грешка.<br>Презаредете страницата и опитайте отново!");
+          }
+        }
+    }
     
     $(function(){
       propagatePatientList();
       newPatient();
       setupScrollers();
+      //executeDdbOperation(null);
     });
     
   </script>
