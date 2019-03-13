@@ -3,9 +3,8 @@ node_js:
 - node
 deploy:
   provider: s3
-  access_key_id: AKIAJIZ7PQXW7BHVZPLQ
-  secret_access_key:
-    secure: WEMICZUB8xGIzluAsWV3srOLQ91cxEdfcMXgRsGp5Ps2jGyhovtTr9q2vGrMmLDFZm6oO+JzMJC023koDJv6BAySwD3P7/+HSULXrG5jzHgVtYaRmpvG6m8h7QulgrvqPNxBlOKJHf5jpRBxzVl/2zARCQ+8BYVv+Qd9mTPPeEwGjFAukgbh/E3NAkkfQidTQpja3biOypFKv9hgM06uth7PaC9Tyd6zsS6tdw6zMy/RTLkJ7ATXGZjaIkD3OEWMwVuAahXlEzzOtGJjoTnVTRxWdNZIV1RhuTK3DrmR8r/LHpK7D/b4kduWiB8lhpC6dyJ3LUgJ8LWzUB+wjnhc2APPafpfDadKTb3OZpQ661Q3wPmQD4zN/iJCuiSxnv6yXPP/HELzCx5ARAiQnVIdWNUdfI6O1bXkifSEeIZKPA2YeWZXepq3Dt5D58aR5HQtBm0+oLiMI0oIK2HEtAS7xstbWCG7VDx1sQJaAp+AOhDQkKpGwb5B/dzs1ofUTz5WAaNsIi+ThI8CBbwqNTSHKL1264lUM475j4Bq9F7f72ZnW28Z9hwaKWKVN8AF8JEXhU9nTbFfRPa77yJfAVeK0ZF5MAdjwH6APl/mVRMJvIGHrYHTyMSdww8j+OYREi86w+pWCjg7CB3JAi3ZLKJ2mjQE3WViqoE9IN7eOiuqgug=
+  access_key_id: $AWS_ACCESS_KEY_ID
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: webapp.arabadjikova.com
   local-dir: src
   acl: public_read
