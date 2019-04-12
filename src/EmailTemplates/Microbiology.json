@@ -1,0 +1,8 @@
+{
+  "Template": {
+    "TemplateName": "Microbiology",
+    "SubjectPart": "Вашето микрибиологично изследване!",
+    "HtmlPart": "<h1>Здравейте {{name}},</h1><p>Резултата от Вашето микробиологично изследване е:<br>Диагноза: {{diagnose}}<br>Penicilin{{penicilin}}.</p>",
+    "TextPart": "Здравейте {{name}},Резултата от Вашето микробиологично изследване е: Диагноза: {{diagnose}}Penicilin{{penicilin}}."
+  } 
+}

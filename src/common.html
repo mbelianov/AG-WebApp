@@ -1,0 +1,52 @@
+<div common>
+  <div class="form-row">
+    <div class="form-group col-md-7 my-0">
+      <label class="my-0" for="patient_name">Пациент</label>
+      <input type="text" class="form-control form-control-sm" id="patient_name">
+    </div>
+    <div class="form-group col-md-2 my-0">
+      <label class="my-0" for="patient_egn">ЕГН</label>
+      <input type="number" class="form-control form-control-sm no-spin" id="patient_egn">
+    </div>
+    <div class="form-group col-md-1 my-0">
+      <label class="my-0" for="patient_age">Възраст</label>
+      <input type="number" class="form-control form-control-sm no-spin" min="10" max="99" id="patient_age">
+    </div>
+    <div class="form-group col-md-2 my-0">
+      <label class="my-0" for="exam_date">Дата</label>
+      <input type="date" class="form-control form-control-sm no-spin" id="exam_date">
+    </div>    
+  </div>
+  <div class="form-row">
+    <div class="form-group col-md-9">
+      <label class="my-0" for="patient_address">Адрес</label>
+      <input type="text" class="form-control form-control-sm" id="patient_address">
+    </div>
+    <div class="form-group col-md-3">
+      <label class="my-0" for="patient_email">Email</label>
+      <input type="email" class="form-control form-control-sm" id="patient_email">
+    </div>    
+  </div>
+</div>
+
+<script>
+  class COMMON extends HTMLElement {
+    constructor() {
+      super();
+       
+      var proto = Object.create(HTMLElement.prototype);
+      var importDoc = document.currentScript.ownerDocument; // importee
+      var div_container = importDoc.querySelector('div[common]');
+      //console.log(template);
+      
+      // import form into main document
+      var clone = document.importNode(div_container, true);
+      
+      var parent = this.parentNode;
+      //this.remove();
+      //parent.prepend(clone);
+      this.appendChild(clone);
+    }
+  }
+  customElements.define('form-common', COMMON);
+</script>

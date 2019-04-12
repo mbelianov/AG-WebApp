@@ -1,0 +1,15 @@
+{
+    "Source": "arabadjikova@arabadjikova.com", 
+    "Destination": {
+        "ToAddresses": [
+            "mbelianov@outlook.com",
+            "mbelianov@gmail.com"
+        ]
+    }, 
+    "ReplyToAddresses": [
+        "parabadjikova@yahoo.com"
+    ], 
+    "ReturnPath": "mbelianov@gmail.com", 
+    "Template": "microbiology", 
+    "TemplateData": "{\"patient_name\":\"Ralica\",\"diagnose\":\"БО\",\"penicillin\":\"Пеницилин\"}"
+}
