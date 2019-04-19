@@ -10,3 +10,4 @@ deploy:
   acl: public_read
   on:
     repo: mbelianov/AG-WebApp
+    tags: true
