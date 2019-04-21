@@ -266,7 +266,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.203.0.min.js"></script>
   <!--<script src="ga_dating_functions.js"></script>-->
-  <script src="amazon-cognito-identity.js"></script>
+  <script src="js/amazon-cognito-identity.js"></script>
   
 
   
@@ -283,15 +283,17 @@
     var accessKeyId = localStorage.getItem("accessKeyId");
     var secretAccessKey = localStorage.getItem("secretAccessKey");
     var poolData = { 
-        UserPoolId : 'us-east-1_njMWzfgEG',
-        ClientId : '2p3alhctu4e6d4fkunpctc8qd'
-      };
+          UserPoolId : 'us-east-1_njMWzfgEG',
+          ClientId : '2p3alhctu4e6d4fkunpctc8qd'
+        };
     var credentials = new AWS.CognitoIdentityCredentials({
-        IdentityPoolId: 'us-east-1:0ee125bb-925d-4880-9623-109b25e17574',
-        Logins: {
-          'cognito-idp.us-east-1.amazonaws.com/us-east-1_njMWzfgEG': ''
-        }
-    });
+          IdentityPoolId: 'us-east-1:0ee125bb-925d-4880-9623-109b25e17574',
+          Logins: {
+            'cognito-idp.us-east-1.amazonaws.com/us-east-1_njMWzfgEG': ''
+          }
+        });
+    var alexaMessageHandlers = []; //reference to functions interested in Alexa messages will be stored here
+    
     //will be used to properly handle authenitacation flow
     //true, means that refreshng credential is not possible
     var credentialsRefreshFailed = true;
@@ -773,27 +775,37 @@
       ws = new WebSocket(wsUri);
       ws.onopen = function(evt){
         console.log("Wesocket CONNECTED");
+        alexaMessageHandlers.forEach(function(handler){
+          handler('connected', null);
+        });        
       }
       
       ws.onclose = function(evt){
         console.log("Webscoket DICONNECTED");
+        alexaMessageHandlers.forEach(function(handler){
+          handler('disconnected', null);
+        });          
       }
       
       ws.onerror = function(evt) {
-        console.log("Webscoket ERROR");
-        console. debug(evt.data);          
+        console.warn("Webscoket ERROR");
+        console. debug(evt.data);  
+        alexaMessageHandlers.forEach(function(handler){
+          handler('disconnected', null);
+        });          
       }
       
       ws.onmessage = function(evt){
-        console.log(evt.data);
-        var msg = JSON.parse(evt.data);
-        console.debug(msg.parameter);
-        console.debug(msg.first_value);
-        console.debug(msg.second_value);
-        
-        $("input#"+msg.parameter).val(msg.first_value);
+        console.log("got WS event:", evt.data);
+        activeFormId= $("div.tab-pane.active form").attr("id");
+        alexaMessageHandlers[activeFormId]('message', JSON.parse(evt.data));
       }
       
+    }
+    
+    function registerAlexaEventHandler(_key, handler){ //the _key parameter will be used to pass the event only to that handler whose form is currenlty active.
+      if (handler && typeof(handler) === "function")
+        alexaMessageHandlers[_key] = handler;
     }
     
     $(function(){

@@ -1,37 +1,6 @@
 <script src="ga_dating_functions.js"></script>
 
-
 <form class="mb-0 px-3" id="uzd">
-<!--  <p class="h2 text-center mt-1">Ултразвукова Пренатална Диагностика</p>
-  <hr>
-  <div class="form-row">
-    <div class="form-group col-md-7">
-      <label for="patient_name">Пациент</label>
-      <input type="text" class="form-control" id="patient_name">
-    </div>
-    <div class="form-group col-md-2">
-      <label for="patient_name">ЕГН</label>
-      <input type="number" class="form-control no-spin" id="patient_egn">
-    </div>
-    <div class="form-group col-md-1">
-      <label for="patient_age">Възраст</label>
-      <input type="number" class="form-control no-spin" min="10" max="99" id="patient_age">
-    </div>
-    <div class="form-group col-md-2">
-      <label for="exam_date">Дата</label>
-      <input type="date" class="form-control no-spin" id="exam_date">
-    </div>    
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-9">
-      <label for="patient_address">Адрес</label>
-      <input type="text" class="form-control" id="patient_address">
-    </div>
-    <div class="form-group col-md-3">
-      <label for="patient_email">Email</label>
-      <input type="email" class="form-control" id="patient_email">
-    </div>    
-  </div>-->
   <div class="form-row">
     <div class="form-group col-md">
       <label for="prm">Последна редовна менструация (ПРМ)</label>
@@ -556,7 +525,10 @@
     $("form#uzd input#prm").change(function(){calculate_gv();}); 
     $("form#uzd input#exam_date").change(function(){calculate_gv();}); 
     setUpBiometricControls();
-  }); 
+    registerAlexaEventHandler($("form").attr("id"), function(event, msg){ //the _key parameter will be used to pass the event only to that handler whose form is currenlty active.
+      console.log(event, msg);
+    }); 
+  });
 
 </script>
 
