@@ -775,24 +775,27 @@
       ws = new WebSocket(wsUri);
       ws.onopen = function(evt){
         console.log("Wesocket CONNECTED");
-        alexaMessageHandlers.forEach(function(handler){
-          handler('connected', null);
-        });        
+        //alexaMessageHandlers.forEach(function(handler){
+        for (handler in alexaMessageHandlers){
+          alexaMessageHandlers[handler]('connected', null);
+        };        
       }
       
       ws.onclose = function(evt){
         console.log("Webscoket DICONNECTED");
-        alexaMessageHandlers.forEach(function(handler){
-          handler('disconnected', null);
-        });          
+        //alexaMessageHandlers.forEach(function(handler){
+        for (handler in alexaMessageHandlers){
+          alexaMessageHandlers[handler]('disconnected', null);
+        };          
       }
       
       ws.onerror = function(evt) {
         console.warn("Webscoket ERROR");
         console. debug(evt.data);  
-        alexaMessageHandlers.forEach(function(handler){
-          handler('disconnected', null);
-        });          
+        //alexaMessageHandlers.forEach(function(handler){
+        for (handler in alexaMessageHandlers){
+          alexaMessageHandlers[handler]('disconnected', null);
+        };          
       }
       
       ws.onmessage = function(evt){
