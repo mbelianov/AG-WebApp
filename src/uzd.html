@@ -536,7 +536,7 @@
     registerAlexaEventHandler($("form").attr("id"), function(event, msg){
       console.log(event, msg);
       if (event == 'message')
-        if (msg.second_value != 'undefined')
+        if (msg.second_value == 'undefined')
           $("form#uzd input#"+msg.parameter).val(msg.first_value);
         else
           $("form#uzd input#"+msg.parameter).val(msg.first_value + " + " + msg.second_value);
