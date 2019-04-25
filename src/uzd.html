@@ -536,10 +536,10 @@
     registerAlexaEventHandler($("form").attr("id"), function(event, msg){
       console.log(event, msg);
       if (event == 'message')
-        if (!msg.second_value)
+        if (msg.second_value !== 'undefined')
           $("form#uzd input#"+msg.parameter).val(msg.first_value);
         else
-          $("form#uzd input#"+msg.parameter).val(msg.first_value+msg.second_value);
+          $("form#uzd input#"+msg.parameter).val(msg.first_value + " + " + msg.second_value);
       
       if (event == 'connected')
         $(".inline-img").css("display","inline");
