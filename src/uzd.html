@@ -97,7 +97,7 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group  mt-0 mb-1">
-        <label class="mr-2  my-0">BPD <img class="inline-img" src="img/alexa_logo.png"></label>
+        <label class="mr-2  my-0">BPD <img class="inline-img"></label>
         <div class="input-group input-group-sm">
           <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="bpd2ga"></select></div>
           <input type="number" class="form-control no-spin" step="any" min="0" id="bpd_mm" purpose="biometric" ga_dating="bpd2ga-input">
@@ -110,7 +110,7 @@
     </div>
     <div class="col-md-6">
       <div class="form-group  mt-0 mb-1">
-        <label class="mr-2  my-0">OFD <img class="inline-img" src="img/alexa_logo.png"></label>
+        <label class="mr-2  my-0">OFD <img class="inline-img"></label>
         <div class="input-group input-group-sm">
           <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="ofd2ga"></select></div>
           <input type="number" class="form-control no-spin" step="any" min="0" id="ofd_mm" purpose="biometric" ga_dating="ofd2ga-input">
@@ -125,7 +125,7 @@
   <div class="row">
     <div class="col-md-6">
       <div class="form-group  mt-0 mb-1">
-        <label class="mr-2  my-0">HC <img class="inline-img" src="img/alexa_logo.png"></label>
+        <label class="mr-2  my-0">HC <img class="inline-img"></label>
         <div class="input-group input-group-sm">
           <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="hc2ga"></select></div>
           <input type="number" class="form-control no-spin" step="any" min="0" id="hc_mm" purpose="biometric" ga_dating="hc2ga-input">
@@ -138,7 +138,7 @@
     </div>
     <div class="col-md-6">
       <div class="form-group  mt-0 mb-1">
-        <label class="mr-2  my-0">Vp <img class="inline-img" src="img/alexa_logo.png"></label>
+        <label class="mr-2  my-0">Vp <img class="inline-img"></label>
         <div class="input-group input-group-sm">
           <div class="input-group-prepend"><select class="form-control form-control-sm" purpose="biometric" ga_dating="vp2ga"></select></div>
           <input type="number" class="form-control no-spin" step="any" min="0" id="vp_mm" purpose="biometric" ga_dating="vp2ga-input">
@@ -533,6 +533,7 @@
     $("form#uzd input#prm").change(function(){calculate_gv();}); 
     $("form#uzd input#exam_date").change(function(){calculate_gv();}); 
     setUpBiometricControls();
+    $("img.inline-img").attr("src", "img/icon_108_A2Z.png");
     registerAlexaEventHandler($("form").attr("id"), function(event, msg){
       console.log(event, msg);
       if (event == 'message')

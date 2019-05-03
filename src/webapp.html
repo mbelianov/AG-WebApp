@@ -771,10 +771,25 @@
       });
     }
     
+    var wsTimerID = 0; 
+    function keepWSAlive() { 
+        var timeout = 120000;  
+        if (ws.readyState == ws.OPEN) {  
+            ws.send('{"message":"ping"}');  
+        }  
+        wsTimerID = setTimeout(keepWSAlive, timeout);  
+    }  
+    function cancelWSKeepAlive() {  
+        if (wsTimerID) {  
+            clearTimeout(wsTimerID);  
+        }  
+    }    
+    
     function setupWebsocketConnection(){
       ws = new WebSocket(wsUri);
       ws.onopen = function(evt){
         console.log("Wesocket CONNECTED");
+        keepWSAlive();
         //alexaMessageHandlers.forEach(function(handler){
         for (handler in alexaMessageHandlers){
           alexaMessageHandlers[handler]('connected', null);
@@ -783,6 +798,7 @@
       
       ws.onclose = function(evt){
         console.log("Webscoket DICONNECTED");
+        cancelWSKeepAlive();
         //alexaMessageHandlers.forEach(function(handler){
         for (handler in alexaMessageHandlers){
           alexaMessageHandlers[handler]('disconnected', null);
