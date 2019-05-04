@@ -773,7 +773,7 @@
     
     var wsTimerID = 0; 
     function keepWSAlive() { 
-        var timeout = 120000;  
+        var timeout = 300000;  // AWS API Gateway will timeout afetr 10 min of inactivity
         if (ws.readyState == ws.OPEN) {  
             ws.send('{"message":"ping"}');  
         }  
@@ -815,7 +815,7 @@
       }
       
       ws.onmessage = function(evt){
-        console.log("got WS event:", evt.data);
+        console.debug("got WS event:", evt.data);
         activeFormId= $("div.tab-pane.active form").attr("id");
         alexaMessageHandlers[activeFormId]('message', JSON.parse(evt.data));
       }

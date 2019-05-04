@@ -1,0 +1,477 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "my exam assistant",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": [
+                        "ok thanks",
+                        "ok thank you",
+                        "thanks",
+                        "thank you"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "RecordParameterIntent",
+                    "slots": [
+                        {
+                            "name": "parameter",
+                            "type": "ParametersList",
+                            "samples": [
+                                "{parameter} {first_value} point {fraction}",
+                                "{parameter}  of {first_value} point {fraction}",
+                                "{parameter} {first_value} plus {second_value}",
+                                "{parameter} of {first_value} plus {second_value}",
+                                "{parameter} {first_value}",
+                                "{parameter} of {first_value}",
+                                "{parameter}"
+                            ]
+                        },
+                        {
+                            "name": "first_value",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{first_value} point {fraction}",
+                                "{first_value} plus {second_value}",
+                                "{first_value}"
+                            ]
+                        },
+                        {
+                            "name": "second_value",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "fraction",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "write down",
+                        "write down {parameter} {first_value}",
+                        "write down {parameter} {first_value} point {fraction}",
+                        "write down {parameter} {first_value} millimeters",
+                        "write down {parameter} {first_value} point {fraction} millimeters",
+                        "write down {parameter} of {first_value}",
+                        "write down {parameter} of {first_value} point {fraction}",
+                        "write down {parameter} of {first_value} millimeters",
+                        "write down {parameter} of {first_value} point {fraction} millimeters",
+                        "write down {parameter} {first_value} plus {second_value}",
+                        "write down {parameter} {first_value} weeks and {second_value} days",
+                        "write down {parameter} of {first_value} weeks and {second_value} days",
+                        "please write down",
+                        "please write down {parameter} {first_value}",
+                        "please write down {parameter} {first_value} point {fraction}",
+                        "please write down {parameter} {first_value} millimeters",
+                        "please write down {parameter} {first_value} point {fraction} millimeters",
+                        "please write down {parameter} of {first_value}",
+                        "please write down {parameter} of {first_value} point {fraction}",
+                        "please write down {parameter} of {first_value} millimeters",
+                        "please write down {parameter} of {first_value} point {fraction} millimeters",
+                        "please write down {parameter} {first_value} plus {second_value}",
+                        "please write down {parameter} {first_value} weeks and {second_value} days",
+                        "please write down {parameter} of {first_value} weeks and {second_value} days",
+                        "write down please",
+                        "write down please {parameter} {first_value}",
+                        "write down please {parameter} {first_value} point {fraction}",
+                        "write down please {parameter} {first_value} millimeters",
+                        "write down please {parameter} {first_value} point {fraction} millimeters",
+                        "write down please {parameter} of {first_value}",
+                        "write down please {parameter} of {first_value} point {fraction}",
+                        "write down please {parameter} of {first_value} millimeters",
+                        "write down please {parameter} of {first_value} point {fraction} millimeters",
+                        "write down please {parameter} {first_value} plus {second_value}",
+                        "write down please {parameter} {first_value} weeks and {second_value} days",
+                        "write down please {parameter} of {first_value} weeks and {second_value} days",
+                        "record",
+                        "record {parameter} {first_value}",
+                        "record {parameter} {first_value} point {fraction}",
+                        "record {parameter} {first_value} millimeters",
+                        "record {parameter} {first_value} point {fraction} millimeters",
+                        "record {parameter} of {first_value}",
+                        "record {parameter} of {first_value} point {fraction}",
+                        "record {parameter} of {first_value} millimeters",
+                        "record {parameter} of {first_value} point {fraction} millimeters",
+                        "record {parameter} {first_value} plus {second_value}",
+                        "record {parameter} {first_value} weeks and {second_value} days",
+                        "record {parameter} of {first_value} weeks and {second_value} days",
+                        "please record",
+                        "please record {parameter} {first_value}",
+                        "please record {parameter} {first_value} point {fraction}",
+                        "please record {parameter} {first_value} millimeters",
+                        "please record {parameter} {first_value} point {fraction} millimeters",
+                        "please record {parameter} of {first_value}",
+                        "please record {parameter} of {first_value} point {fraction}",
+                        "please record {parameter} of {first_value} millimeters",
+                        "please record {parameter} of {first_value} point {fraction} millimeters",
+                        "please record {parameter} {first_value} plus {second_value}",
+                        "please record {parameter} {first_value} weeks and {second_value} days",
+                        "please record {parameter} of {first_value} weeks and {second_value} days",
+                        "record please",
+                        "record please {parameter} {first_value}",
+                        "record please {parameter} {first_value} point {fraction}",
+                        "record please {parameter} {first_value} millimeters",
+                        "record please {parameter} {first_value} point {fraction} millimeters",
+                        "record please {parameter} of {first_value}",
+                        "record please {parameter} of {first_value} point {fraction}",
+                        "record please {parameter} of {first_value} millimeters",
+                        "record please {parameter} of {first_value} point {fraction} millimeters",
+                        "record please {parameter} {first_value} plus {second_value}",
+                        "record please {parameter} {first_value} weeks and {second_value} days",
+                        "record please {parameter} of {first_value} weeks and {second_value} days",
+                        "note down",
+                        "note down {parameter} {first_value}",
+                        "note down {parameter} {first_value} point {fraction}",
+                        "note down {parameter} {first_value} millimeters",
+                        "note down {parameter} {first_value} point {fraction} millimeters",
+                        "note down {parameter} of {first_value}",
+                        "note down {parameter} of {first_value} point {fraction}",
+                        "note down {parameter} of {first_value} millimeters",
+                        "note down {parameter} of {first_value} point {fraction} millimeters",
+                        "note down {parameter} {first_value} plus {second_value}",
+                        "note down {parameter} {first_value} weeks and {second_value} days",
+                        "note down {parameter} of {first_value} weeks and {second_value} days",
+                        "please note down",
+                        "please note down {parameter} {first_value}",
+                        "please note down {parameter} {first_value} point {fraction}",
+                        "please note down {parameter} {first_value} millimeters",
+                        "please note down {parameter} {first_value} point {fraction} millimeters",
+                        "please note down {parameter} of {first_value}",
+                        "please note down {parameter} of {first_value} point {fraction}",
+                        "please note down {parameter} of {first_value} millimeters",
+                        "please note down {parameter} of {first_value} point {fraction} millimeters",
+                        "please note down {parameter} {first_value} plus {second_value}",
+                        "please note down {parameter} {first_value} weeks and {second_value} days",
+                        "please note down {parameter} of {first_value} weeks and {second_value} days",
+                        "note down please",
+                        "note down please {parameter} {first_value}",
+                        "note down please {parameter} {first_value} point {fraction}",
+                        "note down please {parameter} {first_value} millimeters",
+                        "note down please {parameter} {first_value} point {fraction} millimeters",
+                        "note down please {parameter} of {first_value}",
+                        "note down please {parameter} of {first_value} point {fraction}",
+                        "note down please {parameter} of {first_value} millimeters",
+                        "note down please {parameter} of {first_value} point {fraction} millimeters",
+                        "note down please {parameter} {first_value} plus {second_value}",
+                        "note down please {parameter} {first_value} weeks and {second_value} days",
+                        "note down please {parameter} of {first_value} weeks and {second_value} days"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "ParametersList",
+                    "values": [
+                        {
+                            "id": "lc",
+                            "name": {
+                                "value": "l. c. ",
+                                "synonyms": [
+                                    "LC"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "la",
+                            "name": {
+                                "value": "l. a.",
+                                "synonyms": [
+                                    "LA"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "efw",
+                            "name": {
+                                "value": "e. f. w. weight",
+                                "synonyms": [
+                                    "EFW weight",
+                                    "EFW"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "fl_gs",
+                            "name": {
+                                "value": "f. l. age"
+                            }
+                        },
+                        {
+                            "id": "fl_mm",
+                            "name": {
+                                "value": "f. l. length",
+                                "synonyms": [
+                                    "FL length",
+                                    "FL"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ac_gs",
+                            "name": {
+                                "value": "a. c. age"
+                            }
+                        },
+                        {
+                            "id": "ac_mm",
+                            "name": {
+                                "value": "a. c. length",
+                                "synonyms": [
+                                    "AC length",
+                                    "AC"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "tad_gs",
+                            "name": {
+                                "value": "t. a. d. age"
+                            }
+                        },
+                        {
+                            "id": "tad_mm",
+                            "name": {
+                                "value": "t. a. d. length",
+                                "synonyms": [
+                                    "TAD length",
+                                    "TAD"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "apad_gs",
+                            "name": {
+                                "value": "a. p. a. d. age"
+                            }
+                        },
+                        {
+                            "id": "apad_mm",
+                            "name": {
+                                "value": "a. p. a. d. length",
+                                "synonyms": [
+                                    "APAD length",
+                                    "APAD"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "nb_gs",
+                            "name": {
+                                "value": "n. b. age"
+                            }
+                        },
+                        {
+                            "id": "nb_mm",
+                            "name": {
+                                "value": "n. b. length",
+                                "synonyms": [
+                                    "NB length",
+                                    "NB"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "nf_gs",
+                            "name": {
+                                "value": "n. f. age"
+                            }
+                        },
+                        {
+                            "id": "nf_mm",
+                            "name": {
+                                "value": "n. f. length",
+                                "synonyms": [
+                                    "NF length",
+                                    "NF"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "cm_gs",
+                            "name": {
+                                "value": "c. m. age"
+                            }
+                        },
+                        {
+                            "id": "cm_mm",
+                            "name": {
+                                "value": "c. m. length",
+                                "synonyms": [
+                                    "CM length",
+                                    "CM"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "tcd_gs",
+                            "name": {
+                                "value": "t. c. d. age"
+                            }
+                        },
+                        {
+                            "id": "tcd_mm",
+                            "name": {
+                                "value": "t. c. d. length",
+                                "synonyms": [
+                                    "TCD length",
+                                    "TCD"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "hc_gs",
+                            "name": {
+                                "value": "h. c. age"
+                            }
+                        },
+                        {
+                            "id": "vp_gs",
+                            "name": {
+                                "value": "v. p. age"
+                            }
+                        },
+                        {
+                            "id": "vp_mm",
+                            "name": {
+                                "value": "v. p. length",
+                                "synonyms": [
+                                    "VP length",
+                                    "VP"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "hc_mm",
+                            "name": {
+                                "value": "h. c. length",
+                                "synonyms": [
+                                    "HC length",
+                                    "HC"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ofd_gs",
+                            "name": {
+                                "value": "o. f. d. age"
+                            }
+                        },
+                        {
+                            "id": "ofd_mm",
+                            "name": {
+                                "value": "o. f. d. length",
+                                "synonyms": [
+                                    "OFD",
+                                    "o. f. d."
+                                ]
+                            }
+                        },
+                        {
+                            "id": "bpd_mm",
+                            "name": {
+                                "value": "b. p. d. length",
+                                "synonyms": [
+                                    "BPD length",
+                                    "BPDL",
+                                    "BPD",
+                                    "b. p. d. "
+                                ]
+                            }
+                        },
+                        {
+                            "id": "bpd_gs",
+                            "name": {
+                                "value": "b. p. d. age"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "RecordParameterIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "parameter",
+                            "type": "ParametersList",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.830845196571.365303373018"
+                            }
+                        },
+                        {
+                            "name": "first_value",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.262419039532.1290300758586"
+                            }
+                        },
+                        {
+                            "name": "second_value",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "fraction",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "SKILL_RESPONSE"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.830845196571.365303373018",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What parameter?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "What?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Which paramater?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.262419039532.1290300758586",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What value shoud I write down?"
+                    }
+                ]
+            }
+        ]
+    }
+}
