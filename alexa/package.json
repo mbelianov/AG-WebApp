@@ -1,0 +1,24 @@
+{
+  "name": "Dimmi",
+  "version": "1.0.0",
+  "description": "Alexa skill for ObGyn Practitioners",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "alexa",
+    "skill",
+    "ObGyn",
+    "obstetric",
+    "gynecology"
+  ],
+  "author": "GreatBel Ltd",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "ask-sdk-core": "2.5.2",
+    "ask-sdk-model": "1.15.1",
+    "i18next": "^15.1.0",
+    "i18next-sprintf-postprocessor": "^0.2.2"
+  }
+}
