@@ -536,11 +536,22 @@
     $("img.inline-img").attr("src", "img/icon_108_A2Z.png");
     registerAlexaEventHandler($("form").attr("id"), function(event, msg){
       console.debug(event, msg);
-      if (event == 'message')
-        if (msg.second_value == 'undefined')
-          $("form#uzd input#"+msg.parameter).val(msg.first_value);
-        else
-          $("form#uzd input#"+msg.parameter).val(msg.first_value + " + " + msg.second_value);
+      if (event == 'message'){
+        if (msg.type === "generic"){
+          if (msg.second_value)
+            $("form#uzd input#"+msg.parameter).val(msg.first_value + " + " + msg.second_value);
+          else if (msg.fraction)
+            $("form#uzd input#"+msg.parameter).val(msg.first_value + "." + msg.fraction);
+          else
+            $("form#uzd input#"+msg.parameter).val(msg.first_value);
+          $("form#uzd input#"+msg.parameter).change();
+        }
+        else if (msg.type === "specific"){
+            $("form#uzd input#"+msg.key).val(msg.value);
+            $("form#uzd input#"+msg.key).change();
+        }
+      }
+      
       
       if (event == 'connected')
         $(".inline-img").css("display","inline");

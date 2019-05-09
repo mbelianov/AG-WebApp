@@ -71,7 +71,6 @@ const CFIRRecordParameterIntentHandler ={
   }
 };
 
-
 const CFIRErrorHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === `CanFulfillIntentRequest`;
@@ -90,7 +89,6 @@ const CFIRErrorHandler = {
 
 
 // 1. Intent Handlers =============================================
-
 const LaunchRequestHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -125,17 +123,14 @@ const InProgressRecordParameterHandler = {
   },
 };
 
-
 const CompletedRecordParameterHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
     return request.type === 'IntentRequest' && request.intent.name === 'RecordParameterIntent';
   },
   async handle(handlerInput) {
-    console.log ("in CompletedRecordParameterHandler " + JSON.stringify(handlerInput));
 
     const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
-    
     const responseBuilder = handlerInput.responseBuilder;
     const filledSlots = handlerInput.requestEnvelope.request.intent.slots;
     const slotValues = getSlotValues(filledSlots);
@@ -143,62 +138,99 @@ const CompletedRecordParameterHandler = {
     var speechOutput;
     var repromptMsg = requestAttributes.t('REPROMPT_IN_RECORD_PARAMETER_INTENT');
 
-    var msg = '{';
+    var msg = {"type":"generic"};   //there two possible type - "generic" and "specific"
+                                    //"generic": the information in the JSON structure shall be interped as a generic one. No semantical anaysis is possible
+                                    //"specific": the infomration is implicitly specific. the semantics are carried out by the names of the parameters
 
-    let activeUI = await checkActiveUI(); //let see if there is active exam form and warn if this is not the case.
-//    if (activeUI.count == 0){
-//      await callDirectiveService(handlerInput, warning);
-//      speechOutput = "Anyway, I got ";
-//      await sleep (2000);
-//    };
-    
     // Now let's recap
     if (slotValues.parameter.isValidated){
-      
       if (slotValues.second_value.synonym) {
-        
         speechOutput = requestAttributes.t('FEEDBACK_FOR_AGE', slotValues.parameter.synonym, slotValues.first_value.synonym, slotValues.second_value.synonym );
       }
       else if (slotValues.fraction && slotValues.fraction.synonym) {
-        
         speechOutput = requestAttributes.t('FEEDBACK_FOR_LENGTH_WITH_DECIMAL', slotValues.parameter.synonym, slotValues.first_value.synonym, slotValues.fraction.synonym );
       }
       else {
-        
         speechOutput = requestAttributes.t('FEEDBACK_FOR_LENGTH_NO_DECIMAL', slotValues.parameter.synonym, slotValues.first_value.synonym );
       }
 
       Object.keys(slotValues).forEach((item) => {
-        const id_or_synonym = slotValues[item].id?slotValues[item].id:slotValues[item].synonym;
-        msg += `"${item}":"${id_or_synonym}",`;
+        msg[item] = slotValues[item].id?slotValues[item].id:slotValues[item].synonym;
       });
-      msg = msg.slice(0, -1) + '}'; // properly close the json structure
-
     }
     else{// we are not sure
       speechOutput = requestAttributes.t('INTENT_NOT_CLEAR');
       repromptMsg = requestAttributes.t('INTENT_NOT_CLEAR_REPROMTP');
-      msg += "}";
-      
     }
     
-    if (activeUI.count == 0){
-       speechOutput = requestAttributes.t('FEEDBACK_NO_ACTIVE_EXAM_FORM');
-    }
-    
-    if (activeUI.count > 1){
-       speechOutput = requestAttributes.t('FEEDBACK_MORE_THAN_1_ACTIVE_EXAM_FORM');
-    }
-    
-    if (activeUI.count == 1){
-      notifyUI(msg) //We notify the UI page to properly visualise the spoken parameter
-        .then((result) => {console.log(result)});
-    }
+    let activeUI = await notifyUI(JSON.stringify(msg));
+    if (activeUI.count == 0) 
+        speechOutput = requestAttributes.t('FEEDBACK_NO_ACTIVE_EXAM_FORM');
+    if (activeUI.count > 1) 
+        speechOutput = requestAttributes.t('FEEDBACK_MORE_THAN_1_ACTIVE_EXAM_FORM');    
     
 
     return responseBuilder
       .speak(speechOutput)
-      .withSimpleCard("Output", msg)
+      .withSimpleCard("Output", JSON.stringify(msg))
+      .reprompt(repromptMsg)
+      .getResponse();
+  }
+};
+
+const GenericIntentHandler = {
+  canHandle(handlerInput){
+    const request = handlerInput.requestEnvelope.request;
+    return (request.type === 'IntentRequest' && !request.intent.name.includes('AMAZON'));
+  },
+  async handle(handlerInput){
+    //if intent is not complete, delegate back to Alexa
+    const currentIntent = handlerInput.requestEnvelope.request.intent;
+    const request = handlerInput.requestEnvelope.request;
+    if ( request.dialogState !== 'COMPLETED')
+      return handlerInput.responseBuilder
+        .addDelegateDirective(currentIntent).getResponse();    
+    
+    const responseBuilder = handlerInput.responseBuilder;
+    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+    const filledSlots = handlerInput.requestEnvelope.request.intent.slots;
+    const slotValues = getSlotValues(filledSlots);
+    
+    var speechOutput = requestAttributes.t('GENERIC_NOT_SUPPORTED_RESPONSE');
+    var repromptMsg = requestAttributes.t('INTENT_REPROMPT');
+    
+    if (isNaN(slotValues.length.synonym)) //sometimes Alexa sends us non-numeric length
+      return responseBuilder
+        .speak(requestAttributes.t("LENGTH_SLOT_ELICIT_PROMPT"))
+        .reprompt(requestAttributes.t("LENGTH_SLOT_ELICIT_REPROMPT"))
+        .addElicitSlotDirective('length').getResponse();    
+            
+    var msg = {};
+    function buildUpMsg(parameter){
+        msg.type = "specific";
+        msg.key = parameter;
+        msg.value = slotValues.length.synonym + (isNaN(slotValues.length_fraction.synonym)?'':`.${slotValues.length_fraction.synonym}`);      
+    }
+    
+    switch (request.intent.name){
+      case "BiparietalDiameterIntent":
+        buildUpMsg("bpd_mm");
+        speechOutput = requestAttributes.t('BIPARIETAL_DIAMETER_INTENT_RESPONSE', msg.value);
+        break;
+      default:
+      ;
+    }
+    
+    let activeUI = await notifyUI(JSON.stringify(msg));
+    if (activeUI.count == 0) 
+        speechOutput = requestAttributes.t('FEEDBACK_NO_ACTIVE_EXAM_FORM');
+    if (activeUI.count > 1) 
+        speechOutput = requestAttributes.t('FEEDBACK_MORE_THAN_1_ACTIVE_EXAM_FORM');
+
+    
+    return responseBuilder
+      .speak(speechOutput)
+      .withSimpleCard("Output", JSON.stringify(msg))
       .reprompt(repromptMsg)
       .getResponse();
   }
@@ -308,22 +340,8 @@ function getSlotValues(filledSlots) {
     }
   }, this);
   
-  console.log(`The slot values: ${JSON.stringify(slotValues)}`);
-
+  //console.log("The slot values: ", JSON.stringify(slotValues));
   return slotValues;
-}
-
-async function checkActiveUI(){
-  let connectionData;
-  
-  try {
-    connectionData = await ddb.scan({ TableName: TABLE_NAME, ProjectionExpression: 'connectionId, domainName, stage' }).promise();
-  } catch (e) {
-    console.log(e.stack);
-    return { statusCode: 500, body: e.stack };
-  }  
-  
-  return { statusCode: 200, count: connectionData.Count, body: `There are ${connectionData.Count} clients!` };  
 }
 
 async function notifyUI (msg) {
@@ -332,11 +350,14 @@ async function notifyUI (msg) {
   
   try {
     connectionData = await ddb.scan({ TableName: TABLE_NAME, ProjectionExpression: 'connectionId, domainName, stage' }).promise();
-  } catch (e) {
+  } 
+  catch (e) {
     console.log(e.stack);
     return { statusCode: 500, body: e.stack };
   }
-  
+
+  if (connectionData.Count != 1)
+    return {statusCode: 301, count: connectionData.Count, body: `${connectionData.Count} active clients!`};  
   
 //  console.log(connectionData);
   const apigwManagementApi = new AWS.ApiGatewayManagementApi({
@@ -350,13 +371,14 @@ async function notifyUI (msg) {
     apigwManagementApi.endpoint =  domainName + '/' + stage;
     try {
       await apigwManagementApi.postToConnection({ ConnectionId: connectionId, Data: postData }).promise();
-    } catch (e) {
+    } 
+    catch (e) {
       if (e.statusCode === 410) {
         console.log(`Found stale connection, deleting ${connectionId}`);
         await ddb.delete({ TableName: TABLE_NAME, Key: { connectionId } }).promise();
-      } else {
+      } 
+      else {
         console.log(e.stack);
-        //throw e;
         return { statusCode: 500, body: e.stack };
       }
     }
@@ -364,13 +386,14 @@ async function notifyUI (msg) {
   
   try {
     await Promise.all(postCalls);
-  } catch (e) {
+  } 
+  catch (e) {
     console.log(e.stack);
     return { statusCode: 500, body: e.stack };
   }
   
   //console.log(`From NotifyUI: notified ${connectionData.Count} clients!`);
-  return { statusCode: 200, count: connectionData.Count, body: `Notified ${connectionData.Count} clients!` };
+  return { statusCode: 200, count: connectionData.Count, body: "OK" };
 }
 
 async function callDirectiveService(handlerInput, msg) {
@@ -399,8 +422,6 @@ async function callDirectiveService(handlerInput, msg) {
 function sleep(milliseconds) {
   return new Promise(resolve => setTimeout(resolve(), milliseconds));
  }
-
-
 
 const LocalizationInterceptor = {
     process(handlerInput) {
@@ -447,6 +468,7 @@ exports.handler = skillBuilder
     LaunchRequestHandler,
     InProgressRecordParameterHandler,
     CompletedRecordParameterHandler,
+    GenericIntentHandler,
     HelpHandler,
     ExitHandler,
     SessionEndedRequestHandler
