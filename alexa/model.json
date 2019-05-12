@@ -1,0 +1,642 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "my exam assistant",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": [
+                        "how can you help",
+                        "help me please",
+                        "help please",
+                        "what can you do",
+                        "i need help",
+                        "help"
+                    ]
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": [
+                        "thank you bye",
+                        "ok thank you  bye",
+                        "no thank you",
+                        "no thanks",
+                        "no",
+                        "ok thanks",
+                        "ok thank you",
+                        "thanks",
+                        "thank you",
+                        "tahnk you bye"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "RecordParameterIntent",
+                    "slots": [
+                        {
+                            "name": "parameter",
+                            "type": "ParametersList",
+                            "samples": [
+                                "{parameter} {first_value} point {fraction}",
+                                "{parameter} {first_value} point {fraction} millimeters",
+                                "{parameter}  of {first_value} point {fraction}",
+                                "{parameter}  of {first_value} point {fraction} millimeters",
+                                "{parameter} {first_value} plus {second_value}",
+                                "{parameter} {first_value} weeks plus {second_value} days",
+                                "{parameter} {first_value} weeks and {second_value} days",
+                                "{parameter} of {first_value} plus {second_value}",
+                                "{parameter} of {first_value} weeks plus {second_value} days",
+                                "{parameter} of {first_value} weeks and {second_value} days",
+                                "{parameter} {first_value}",
+                                "{parameter} {first_value} millimeters",
+                                "{parameter} {first_value} millimeter",
+                                "{parameter} of {first_value}",
+                                "{parameter} of {first_value} millimeters",
+                                "{parameter} of {first_value} millimeter",
+                                "{parameter}"
+                            ]
+                        },
+                        {
+                            "name": "first_value",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{first_value}",
+                                "{first_value} millimeter",
+                                "{first_value} millimeters",
+                                "{first_value} point {fraction}",
+                                "{first_value} point {fraction} millimeters",
+                                "{first_value} plus {second_value}",
+                                "{first_value} weeks plus {second_value} days",
+                                "{first_value} weeks and {second_value} days"
+                            ]
+                        },
+                        {
+                            "name": "second_value",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "fraction",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "{parameter} is {first_value} weeks and {second_value} days",
+                        "{parameter} is {first_value} weeks plus {second_value} days",
+                        "{parameter} is {first_value} plus {second_value}",
+                        "{parameter} is {first_value} point {fraction} millimeters",
+                        "{parameter} is {first_value} point {fraction}",
+                        "{parameter} is {first_value} millimeters",
+                        "{parameter} is {first_value} millimeter",
+                        "{parameter} is {first_value}",
+                        "write",
+                        "write {parameter} {first_value}",
+                        "write {parameter} {first_value} point {fraction}",
+                        "write {parameter} {first_value} millimeter",
+                        "write {parameter} {first_value} millimeters",
+                        "write {parameter} {first_value} point {fraction} millimeters",
+                        "write {parameter} of {first_value}",
+                        "write {parameter} of {first_value} point {fraction}",
+                        "write {parameter} of {first_value} millimeter",
+                        "write {parameter} of {first_value} millimeters",
+                        "write {parameter} of {first_value} point {fraction} millimeters",
+                        "write {parameter} {first_value} plus {second_value}",
+                        "write {parameter} {first_value} weeks plus {second_value} days",
+                        "write {parameter} {first_value} weeks and {second_value} days",
+                        "write {parameter} of {first_value} plus {second_value}",
+                        "write {parameter} of {first_value} weeks plus {second_value} days",
+                        "write {parameter} of {first_value} weeks and {second_value} days",
+                        "write down",
+                        "write down {parameter} {first_value}",
+                        "write down {parameter} {first_value} point {fraction}",
+                        "write down {parameter} {first_value} millimeter",
+                        "write down {parameter} {first_value} millimeters",
+                        "write down {parameter} {first_value} point {fraction} millimeters",
+                        "write down {parameter} of {first_value}",
+                        "write down {parameter} of {first_value} point {fraction}",
+                        "write down {parameter} of {first_value} millimeter",
+                        "write down {parameter} of {first_value} millimeters",
+                        "write down {parameter} of {first_value} point {fraction} millimeters",
+                        "write down {parameter} {first_value} plus {second_value}",
+                        "write down {parameter} {first_value} weeks plus {second_value} days",
+                        "write down {parameter} {first_value} weeks and {second_value} days",
+                        "write down {parameter} of {first_value} plus {second_value}",
+                        "write down {parameter} of {first_value} weeks plus {second_value} days",
+                        "write down {parameter} of {first_value} weeks and {second_value} days"
+                    ]
+                },
+                {
+                    "name": "BiparietalDiameterIntent",
+                    "slots": [
+                        {
+                            "name": "length",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{length} millimeter",
+                                "{length} millimeters",
+                                "{length} point {length_fraction}",
+                                "{length} point {length_fraction} millimeters",
+                                "{length}"
+                            ]
+                        },
+                        {
+                            "name": "length_fraction",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "write biparietal diameter",
+                        "write biparietal diameter of {length} point {length_fraction} millimeters",
+                        "write biparietal diameter of {length} millimeters",
+                        "write biparietal diameter of {length} millimeter",
+                        "length of biparietal diameter is {length} point {length_fraction} millimeters",
+                        "length of biparietal diameter is {length} millimeters",
+                        "length of biparietal diameter is {length} millimeter",
+                        "biparietal diameter is {length} point {length_fraction} millimeters",
+                        "biparietal diameter is {length} millimeters",
+                        "biparietal diameter is {length} millimeter"
+                    ]
+                },
+                {
+                    "name": "OccipitofrontalDiameterIntent",
+                    "slots": [
+                        {
+                            "name": "length",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{length} millimeter",
+                                "{length} millimeters",
+                                "{length} point {length_fraction}",
+                                "{length} point {length_fraction} millimeters",
+                                "{length}"
+                            ]
+                        },
+                        {
+                            "name": "length_fraction",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "write occipitofrontal diameter",
+                        "write occipitofrontal diameter of {length} point {length_fraction} millimeters",
+                        "write occipitofrontal diameter of {length} millimeters",
+                        "write occipitofrontal diameter of {length} millimeter",
+                        "length of occipitofrontal diameter is {length} point {length_fraction} millimeters",
+                        "length of occipitofrontal diameter is {length} millimeters",
+                        "length of occipitofrontal diameter is {length} millimeter",
+                        "occipitofrontal diameter is {length} point {length_fraction} millimeters",
+                        "occipitofrontal diameter is {length} millimeters",
+                        "occipitofrontal diameter is {length} millimeter"
+                    ]
+                },
+                {
+                    "name": "AbdominalCircumferenceIntent",
+                    "slots": [
+                        {
+                            "name": "length",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{length} millimeter",
+                                "{length} millimeters",
+                                "{length} point {length_fraction}",
+                                "{length} point {length_fraction} millimeters",
+                                "{length}"
+                            ]
+                        },
+                        {
+                            "name": "length_fraction",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "write abdominal circumference",
+                        "write abdominal circumference of {length} point {length_fraction} millimeters",
+                        "write abdominal circumference of {length} millimeters",
+                        "write abdominal circumference of {length} millimeter",
+                        "length of abdominal circumference is {length} point {length_fraction} millimeters",
+                        "length of abdominal circumference is {length} millimeters",
+                        "length of abdominal circumference is {length} millimeter",
+                        "abdominal circumference is {length} point {length_fraction} millimeters",
+                        "abdominal circumference is {length} millimeters",
+                        "abdominal circumference is {length} millimeter"
+                    ]
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                }
+            ],
+            "types": [
+                {
+                    "name": "ParametersList",
+                    "values": [
+                        {
+                            "id": "lc",
+                            "name": {
+                                "value": "l. c. ",
+                                "synonyms": [
+                                    "LC"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "la",
+                            "name": {
+                                "value": "l. a.",
+                                "synonyms": [
+                                    "LA"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "efw",
+                            "name": {
+                                "value": "e. f. w. weight",
+                                "synonyms": [
+                                    "EFW weight",
+                                    "EFW"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "fl_gs",
+                            "name": {
+                                "value": "f. l. age",
+                                "synonyms": [
+                                    "FL age"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "fl_mm",
+                            "name": {
+                                "value": "f. l. length",
+                                "synonyms": [
+                                    "FL length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ac_gs",
+                            "name": {
+                                "value": "a. c. age",
+                                "synonyms": [
+                                    "AC age"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ac_mm",
+                            "name": {
+                                "value": "a. c. length",
+                                "synonyms": [
+                                    "AC length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "tad_gs",
+                            "name": {
+                                "value": "t. a. d. age",
+                                "synonyms": [
+                                    "TAD age"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "tad_mm",
+                            "name": {
+                                "value": "t. a. d. length",
+                                "synonyms": [
+                                    "TAD length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "apad_gs",
+                            "name": {
+                                "value": "a. p. a. d. age",
+                                "synonyms": [
+                                    "APAD age"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "apad_mm",
+                            "name": {
+                                "value": "a. p. a. d. length",
+                                "synonyms": [
+                                    "APAD length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "nb_gs",
+                            "name": {
+                                "value": "n. b. age",
+                                "synonyms": [
+                                    "NB age"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "nb_mm",
+                            "name": {
+                                "value": "n. b. length",
+                                "synonyms": [
+                                    "NB length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "nf_gs",
+                            "name": {
+                                "value": "n. f. age",
+                                "synonyms": [
+                                    "NF age"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "nf_mm",
+                            "name": {
+                                "value": "n. f. length",
+                                "synonyms": [
+                                    "NF length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "cm_gs",
+                            "name": {
+                                "value": "c. m. age",
+                                "synonyms": [
+                                    "CM age"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "cm_mm",
+                            "name": {
+                                "value": "c. m. length",
+                                "synonyms": [
+                                    "CM length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "tcd_gs",
+                            "name": {
+                                "value": "t. c. d. age",
+                                "synonyms": [
+                                    "TCD age"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "tcd_mm",
+                            "name": {
+                                "value": "t. c. d. length",
+                                "synonyms": [
+                                    "TCD length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "hc_gs",
+                            "name": {
+                                "value": "h. c. age",
+                                "synonyms": [
+                                    "HC age"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "vp_gs",
+                            "name": {
+                                "value": "v. p. age",
+                                "synonyms": [
+                                    "VP age"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "vp_mm",
+                            "name": {
+                                "value": "v. p. length",
+                                "synonyms": [
+                                    "VP length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "hc_mm",
+                            "name": {
+                                "value": "h. c. length",
+                                "synonyms": [
+                                    "HC length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ofd_gs",
+                            "name": {
+                                "value": "o. f. d. age",
+                                "synonyms": [
+                                    "OFD age"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ofd_mm",
+                            "name": {
+                                "value": "o. f. d. length",
+                                "synonyms": [
+                                    "OFD length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "bpd_mm",
+                            "name": {
+                                "value": "b. p. d. length",
+                                "synonyms": [
+                                    "BPD length"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "bpd_gs",
+                            "name": {
+                                "value": "b. p. d. age",
+                                "synonyms": [
+                                    "BPD age"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "dialog": {
+            "intents": [
+                {
+                    "name": "RecordParameterIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "parameter",
+                            "type": "ParametersList",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.830845196571.365303373018"
+                            }
+                        },
+                        {
+                            "name": "first_value",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.262419039532.1290300758586"
+                            }
+                        },
+                        {
+                            "name": "second_value",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "fraction",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "BiparietalDiameterIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "length",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.957645674870.424558227038"
+                            }
+                        },
+                        {
+                            "name": "length_fraction",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "OccipitofrontalDiameterIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "length",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.957645674870.424558227038"
+                            }
+                        },
+                        {
+                            "name": "length_fraction",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                },
+                {
+                    "name": "AbdominalCircumferenceIntent",
+                    "delegationStrategy": "ALWAYS",
+                    "confirmationRequired": false,
+                    "prompts": {},
+                    "slots": [
+                        {
+                            "name": "length",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.957645674870.424558227038"
+                            }
+                        },
+                        {
+                            "name": "length_fraction",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        }
+                    ]
+                }
+            ],
+            "delegationStrategy": "SKILL_RESPONSE"
+        },
+        "prompts": [
+            {
+                "id": "Elicit.Slot.830845196571.365303373018",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What parameter?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "Which paramater?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.262419039532.1290300758586",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "What value shoud I write down?"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.957645674870.424558227038",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what length did you say?"
+                    },
+                    {
+                        "type": "PlainText",
+                        "value": "please, repeat the length."
+                    }
+                ]
+            }
+        ]
+    }
+}
