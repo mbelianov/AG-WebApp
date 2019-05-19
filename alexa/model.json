@@ -26,11 +26,8 @@
                         "no thank you",
                         "no thanks",
                         "no",
-                        "ok thanks",
-                        "ok thank you",
                         "thanks",
-                        "thank you",
-                        "tahnk you bye"
+                        "thank you"
                     ]
                 },
                 {
@@ -148,19 +145,50 @@
                         {
                             "name": "length_fraction",
                             "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "willAddGA",
+                            "type": "YesNoSlotType",
+                            "samples": [
+                                "{willAddGA} {ga_weeks} plus {ga_days}",
+                                "{willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                                "{willAddGA} {ga_weeks} weeks and {ga_days} days",
+                                "{willAddGA}"
+                            ]
+                        },
+                        {
+                            "name": "ga_weeks",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{ga_weeks} plus {ga_days}",
+                                "{ga_weeks} weeks plus {ga_days} days",
+                                "{ga_weeks} weeks and {ga_days} days"
+                            ]
+                        },
+                        {
+                            "name": "ga_days",
+                            "type": "AMAZON.NUMBER"
                         }
                     ],
                     "samples": [
-                        "write biparietal diameter",
-                        "write biparietal diameter of {length} point {length_fraction} millimeters",
-                        "write biparietal diameter of {length} millimeters",
-                        "write biparietal diameter of {length} millimeter",
+                        "write down biparietal diameter of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "write down biparietal diameter of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "write down biparietal diameter of {length} point {length_fraction} millimeters",
+                        "write down biparietal diameter of {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "write down biparietal diameter of {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "write down biparietal diameter of {length} millimeters",
+                        "length of biparietal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "length of biparietal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
                         "length of biparietal diameter is {length} point {length_fraction} millimeters",
+                        "length of biparietal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "length of biparietal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
                         "length of biparietal diameter is {length} millimeters",
-                        "length of biparietal diameter is {length} millimeter",
+                        "biparietal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "biparietal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
                         "biparietal diameter is {length} point {length_fraction} millimeters",
-                        "biparietal diameter is {length} millimeters",
-                        "biparietal diameter is {length} millimeter"
+                        "biparietal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "biparietal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "biparietal diameter is {length} millimeters"
                     ]
                 },
                 {
@@ -481,6 +509,38 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "YesNoSlotType",
+                    "values": [
+                        {
+                            "id": "FALSE",
+                            "name": {
+                                "value": "no",
+                                "synonyms": [
+                                    "no thank you",
+                                    "I do not",
+                                    "nope"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "TRUE",
+                            "name": {
+                                "value": "yes",
+                                "synonyms": [
+                                    "gestational age",
+                                    "i do",
+                                    "yes i do",
+                                    "yeah",
+                                    "yep",
+                                    "of course",
+                                    "sure",
+                                    "yes sure"
+                                ]
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -528,7 +588,7 @@
                 },
                 {
                     "name": "BiparietalDiameterIntent",
-                    "delegationStrategy": "ALWAYS",
+                    "delegationStrategy": "SKILL_RESPONSE",
                     "confirmationRequired": false,
                     "prompts": {},
                     "slots": [
@@ -543,6 +603,31 @@
                         },
                         {
                             "name": "length_fraction",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "willAddGA",
+                            "type": "YesNoSlotType",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.555599606682.618531124320"
+                            }
+                        },
+                        {
+                            "name": "ga_weeks",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.148912958518.58342039961"
+                            }
+                        },
+                        {
+                            "name": "ga_days",
                             "type": "AMAZON.NUMBER",
                             "confirmationRequired": false,
                             "elicitationRequired": false,
@@ -634,6 +719,24 @@
                     {
                         "type": "PlainText",
                         "value": "please, repeat the length."
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.148912958518.58342039961",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "ok, tell me"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.555599606682.618531124320",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "would you like to add gestational age"
                     }
                 ]
             }
