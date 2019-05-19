@@ -15,59 +15,56 @@ const languageStrings = {
   };
 
 const ddb = new AWS.DynamoDB.DocumentClient({ apiVersion: '2012-08-10' });
-
 const { TABLE_NAME } = process.env;
 
 
 
 // 0. Name-Free Invocation ========================================
-const CFIRRecordParameterIntentHandler ={
+const CFIRRecordParameterIntentHandler = {
   canHandle(handlerInput){
-    return handlerInput.requestEnvelope.request.type === 'CanFulfillIntentRequest' &&
-     handlerInput.requestEnvelope.request.intent.name === 'RecordParameterIntent';
-  },
+    //console.log ("in CFIRRecordParameterIntentHandler " + JSON.stringify(handlerInput));
+    return  handlerInput.requestEnvelope.request.type === 'CanFulfillIntentRequest' &&
+            handlerInput.requestEnvelope.request.intent.name === 'RecordParameterIntent';
+    },
   handle(handlerInput){
     console.log ("in CFIRRecordParameterIntentHandler " + JSON.stringify(handlerInput));
     //const intentName = handlerInput.requestEnvelope.request.intent.name;
     const filledSlots = handlerInput.requestEnvelope.request.intent.slots;
     const slotValues = getSlotValues(filledSlots);
 
-
     if (slotValues.parameter.isValidated && slotValues.first_value.synonym) {
       console.log ("in CFIR RecordParameterIntentHandler YES");
       return handlerInput.responseBuilder
-      .withCanFulfillIntent(
-        {
+      .withCanFulfillIntent({
           "canFulfill": "YES",
-          "slots":{
-              "parameter": {
-                  "canUnderstand": "YES",
-                  "canFulfill": "YES"
-                },
-              "first_value": {
-                  "canUnderstand": "YES",
-                  "canFulfill": "YES"
-                },
-              "second_value": {
-                  "canUnderstand": "YES",
-                  "canFulfill": "YES"
-                },
-              "fraction": {
-                  "canUnderstand": "YES",
-                  "canFulfill": "YES"
-                }                
-            }
+          "slots":{ "parameter": {"canUnderstand": "YES","canFulfill": "YES"},
+                    "first_value": {"canUnderstand": "YES","canFulfill": "YES"},
+                    "second_value": {"canUnderstand": "YES","canFulfill": "YES"},
+                    "fraction": {"canUnderstand": "YES","canFulfill": "YES"}                
+                  }
         })
-        .getResponse();
-    } else {
+      .getResponse();
+    } 
+    else {
       console.log ("in CFIR RecordParameterIntentHandler canFulfill == NO");
       return handlerInput.responseBuilder
-      .withCanFulfillIntent(
-        {
-          "canFulfill": "NO"
-        })
-        .getResponse();
+      .withCanFulfillIntent({"canFulfill": "NO"})
+      .getResponse();
     }
+  }
+};
+
+const CFIRSpecificIntentHandler = {
+  canHandle(handlerInput){
+    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+    const request = handlerInput.requestEnvelope.request;
+    return (request.type === 'CanFulfillIntentRequest' && requestAttributes.isSpecific);
+  },
+  handle(handlerInput){
+    console.log("in CFIRSpecificIntentHandler YES");
+    return handlerInput.responseBuilder
+      .withCanFulfillIntent({"canFulfill": "YES"})
+      .getResponse();
   }
 };
 
@@ -79,10 +76,7 @@ const CFIRErrorHandler = {
     console.log(`CFIR Error handled: ${error.message}`);
 
     return handlerInput.responseBuilder
-      .withCanFulfillIntent(
-        {
-          "canFulfill": "NO"
-        })
+      .withCanFulfillIntent({"canFulfill": "NO"})
       .getResponse();
   },
 };
@@ -115,7 +109,7 @@ const InProgressRecordParameterHandler = {
       request.dialogState !== 'COMPLETED';
   },
   handle(handlerInput) {
-    console.log("Hello from InProgressRecordParameterHandler...");
+    //console.log("Hello from InProgressRecordParameterHandler...");
     const currentIntent = handlerInput.requestEnvelope.request.intent;
     return handlerInput.responseBuilder
       .addDelegateDirective(currentIntent)
@@ -136,24 +130,53 @@ const CompletedRecordParameterHandler = {
     const slotValues = getSlotValues(filledSlots);
 
     var speechOutput;
-    var repromptMsg = requestAttributes.t('REPROMPT_IN_RECORD_PARAMETER_INTENT');
+    var repromptMsg = requestAttributes.t('INTENT_REPROMPT');
 
-    var msg = {"type":"generic"};   //there two possible type - "generic" and "specific"
-                                    //"generic": the information in the JSON structure shall be interped as a generic one. No semantical anaysis is possible
-                                    //"specific": the infomration is implicitly specific. the semantics are carried out by the names of the parameters
+    var msg = {};   //there two possible type - "generic" and "specific"
+                    //"generic": the information in the JSON structure shall be interped as a generic one. No semantical anaysis is possible
+                    //"specific": the infomration is implicitly specific. the semantics are carried out by the names of the parameters
 
     // Now let's recap
     if (slotValues.parameter.isValidated){
-      if (slotValues.second_value.synonym) {
+      if (isNaN(slotValues.first_value.synonym)){// sometime Alexa sends us non numbers...
+        console.log("first_value is not a number: ", slotValues.first_value.synonym);
+        return responseBuilder
+          .speak(requestAttributes.t("FIRST_VALUE_SLOT_ELICIT_PROMPT"))
+          .reprompt(requestAttributes.t("FIRST_VALUE_SLOT_ELICIT_REPROMPT"))
+          .addElicitSlotDirective('first_value').getResponse();   
+      }
+      if (slotValues.second_value && slotValues.second_value.synonym) {
+        if (isNaN(slotValues.second_value.synonym)){// sometime Alexa sends us non numbers...
+          console.log("second_value is not a number: ", slotValues.second_value.synonym);
+          return responseBuilder
+            .speak(requestAttributes.t("FIRST_VALUE_SLOT_ELICIT_PROMPT"))
+            .reprompt(requestAttributes.t("FIRST_VALUE_SLOT_ELICIT_REPROMPT"))
+            .addElicitSlotDirective('first_value').getResponse();   
+        }
+       if (slotValues.second_value.synonym > 6){// second value can not be higher than 6
+          console.log("second_value is too big: ", slotValues.second_value.synonym);
+          return responseBuilder
+            .speak(requestAttributes.t("SECOND_VALUE_TOO_BIG_PROMPT"))
+            .reprompt(requestAttributes.t("SECOND_VALUE_TOO_BIG_REPROMPT"))
+            .addElicitSlotDirective('first_value').getResponse();   
+        }           
         speechOutput = requestAttributes.t('FEEDBACK_FOR_AGE', slotValues.parameter.synonym, slotValues.first_value.synonym, slotValues.second_value.synonym );
       }
       else if (slotValues.fraction && slotValues.fraction.synonym) {
+        if (isNaN(slotValues.fraction.synonym)){// sometime Alexa sends us non numbers...
+          console.log("fraction is not a number: ", slotValues.fraction.synonym);
+          return responseBuilder
+            .speak(requestAttributes.t("FIRST_VALUE_SLOT_ELICIT_PROMPT"))
+            .reprompt(requestAttributes.t("FIRST_VALUE_SLOT_ELICIT_REPROMPT"))
+            .addElicitSlotDirective('first_value').getResponse();   
+        }        
         speechOutput = requestAttributes.t('FEEDBACK_FOR_LENGTH_WITH_DECIMAL', slotValues.parameter.synonym, slotValues.first_value.synonym, slotValues.fraction.synonym );
       }
       else {
         speechOutput = requestAttributes.t('FEEDBACK_FOR_LENGTH_NO_DECIMAL', slotValues.parameter.synonym, slotValues.first_value.synonym );
       }
-
+      
+      msg.type = "generic";
       Object.keys(slotValues).forEach((item) => {
         msg[item] = slotValues[item].id?slotValues[item].id:slotValues[item].synonym;
       });
@@ -169,7 +192,7 @@ const CompletedRecordParameterHandler = {
     if (activeUI.count > 1) 
         speechOutput = requestAttributes.t('FEEDBACK_MORE_THAN_1_ACTIVE_EXAM_FORM');    
     
-
+    console.log(msg);
     return responseBuilder
       .speak(speechOutput)
       .withSimpleCard("Output", JSON.stringify(msg))
@@ -178,56 +201,121 @@ const CompletedRecordParameterHandler = {
   }
 };
 
-const GenericIntentHandler = {
+
+const SpecificIntentHandler = {
   canHandle(handlerInput){
     const request = handlerInput.requestEnvelope.request;
-    return (request.type === 'IntentRequest' && !request.intent.name.includes('AMAZON'));
+    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+    return (request.type === 'IntentRequest' && requestAttributes.isSpecific);
   },
   async handle(handlerInput){
     //if intent is not complete, delegate back to Alexa
     const currentIntent = handlerInput.requestEnvelope.request.intent;
     const request = handlerInput.requestEnvelope.request;
-    if ( request.dialogState !== 'COMPLETED')
-      return handlerInput.responseBuilder
-        .addDelegateDirective(currentIntent).getResponse();    
+    //if ( request.dialogState !== 'COMPLETED')
+    //  return handlerInput.responseBuilder
+    //    .addDelegateDirective(currentIntent).getResponse();    
     
     const responseBuilder = handlerInput.responseBuilder;
     const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+    const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+          sessionAttributes.relatedIntent = currentIntent.name;
     const filledSlots = handlerInput.requestEnvelope.request.intent.slots;
     const slotValues = getSlotValues(filledSlots);
+    console.log(slotValues);
     
+        
     var speechOutput = requestAttributes.t('GENERIC_NOT_SUPPORTED_RESPONSE');
     var repromptMsg = requestAttributes.t('INTENT_REPROMPT');
-    
-    if (isNaN(slotValues.length.synonym)) //sometimes Alexa sends us non-numeric length
+
+    if (!slotValues.length || !slotValues.length.synonym || slotValues.length.synonym == 'undefined') //length is mising. Ask for it
+      return responseBuilder
+        .speak(requestAttributes.t("LENGTH_SLOT_MISSING_PROMPT"))
+        .reprompt(requestAttributes.t("LENGTH_SLOT_MISSING_REPROMPT"))
+        .addElicitSlotDirective('length').getResponse();    
+                
+    if (isNaN(slotValues.length.synonym) || (slotValues.fraction && isNaN(slotValues.fraction.synonym))) //sometimes Alexa sends us non-numeric length
       return responseBuilder
         .speak(requestAttributes.t("LENGTH_SLOT_ELICIT_PROMPT"))
         .reprompt(requestAttributes.t("LENGTH_SLOT_ELICIT_REPROMPT"))
         .addElicitSlotDirective('length').getResponse();    
-            
+    
+    if (isNaN(slotValues.ga_weeks.synonym) && slotValues.willAddGA.isValidated && slotValues.willAddGA.id == 'TRUE'){ 
+      //if ga_weeks is already populated with a number, then we assume user wants to add gestational age and we do not care for willAddGA indicator
+      return responseBuilder
+        .speak(requestAttributes.t('GESTATIONAL_AGE_MISSING_PROMPT'))
+        .reprompt(requestAttributes.t('GESTATIONAL_AGE_MISSING_REPROMPT'))
+        .addElicitSlotDirective('ga_weeks', currentIntent)
+        .getResponse();
+    }    
+    
+    if (isNaN(slotValues.ga_weeks.synonym) && !slotValues.willAddGA.isValidated){
+      //if ga_weeks is already populated with a number, then we assume user wants to add gestational age and we do not care for willAddGA indicator      
+      return responseBuilder
+        .speak(requestAttributes.t('PROMPT_FOR_GESTATIONAL_AGE'))
+        .reprompt(requestAttributes.t('REPROMPT_FOR_GESTATIONAL_AGE'))
+        .addElicitSlotDirective('willAddGA', currentIntent)
+        .getResponse();
+    }    
+    
+
+    if (!isNaN(slotValues.ga_weeks.synonym) && slotValues.ga_days.synonym && isNaN(slotValues.ga_days.synonym)){
+      return responseBuilder
+        .speak(requestAttributes.t('GESTATIONAL_AGE_AMBIGUOUS_PROMPT'))
+        .reprompt(requestAttributes.t('GESTATIONAL_AGE_AMBIGUOUS_REPROMPT'))
+        .addElicitSlotDirective('ga_weeks', currentIntent)
+        .getResponse();
+    }
+    
+    
     var msg = {};
     function buildUpMsg(parameter){
         msg.type = "specific";
-        msg.key = parameter;
-        msg.value = slotValues.length.synonym + (isNaN(slotValues.length_fraction.synonym)?'':`.${slotValues.length_fraction.synonym}`);      
+        msg.items = [];
+        msg.items[0] = {};
+        msg.items[0].key = parameter + "_mm";
+        msg.items[0].value = slotValues.length.synonym + (isNaN(slotValues.length_fraction.synonym)?'':`.${slotValues.length_fraction.synonym}`); 
+        
+        if (!isNaN(slotValues.ga_weeks.synonym)){
+          msg.items[1] = {};
+          msg.items[1].key = parameter + "_gs";
+          msg.items[1].value = slotValues.ga_weeks.synonym + (isNaN(slotValues.ga_days.synonym)?' + 0':` + ${slotValues.ga_days.synonym}`);
+        }
     }
     
     switch (request.intent.name){
       case "BiparietalDiameterIntent":
-        buildUpMsg("bpd_mm");
-        speechOutput = requestAttributes.t('BIPARIETAL_DIAMETER_INTENT_RESPONSE', msg.value);
+        buildUpMsg("bpd");
+        speechOutput = requestAttributes.t('BIPARIETAL_DIAMETER_INTENT_RESPONSE', msg.items[0].value);
         break;
+      case "AbdominalCircumferenceIntent":
+        buildUpMsg("ac");
+        speechOutput = requestAttributes.t('ABDOMINAL_CIRCUMFERENCE_INTENT_RESPONSE', msg.items[0].value);
+        break;
+      case "OccipitofrontalDiameterIntent":
+        buildUpMsg("ofd");
+        speechOutput = requestAttributes.t('OCCIPTOFRONTAL_DIAMETER_INTENT_RESPONSE', msg.items[0].value);
+        break;        
       default:
       ;
     }
     
+    if (!isNaN(slotValues.ga_weeks.synonym)){
+      if (!isNaN(slotValues.ga_days.synonym))
+        speechOutput += requestAttributes.t('GESTATIONAL_AGE_FEEDBACK', slotValues.ga_weeks.synonym, slotValues.ga_days.synonym);
+      else
+        speechOutput += requestAttributes.t("GESTATIONAL_AGE_FEEDBACK", slotValues.ga_weeks.synonym, '0');
+    }
+    
+    speechOutput += requestAttributes.t("ANYTHING_ELSE_PROMPT");
+      
     let activeUI = await notifyUI(JSON.stringify(msg));
     if (activeUI.count == 0) 
         speechOutput = requestAttributes.t('FEEDBACK_NO_ACTIVE_EXAM_FORM');
     if (activeUI.count > 1) 
         speechOutput = requestAttributes.t('FEEDBACK_MORE_THAN_1_ACTIVE_EXAM_FORM');
 
-    
+    console.log(msg);
     return responseBuilder
       .speak(speechOutput)
       .withSimpleCard("Output", JSON.stringify(msg))
@@ -253,6 +341,21 @@ const HelpHandler = {
   },
 };
 
+const YesIntentHanlder = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    return (request.type === 'IntentRequest'
+      && (request.intent.name === 'AMAZON.YesIntent'));    
+  },
+  handle(handlerInput){
+    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+    const speechOutput = requestAttributes.t('YES_REPLY');        
+    return handlerInput.responseBuilder
+      .speak(speechOutput)
+      .getResponse();
+  }
+};
+
 const ExitHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -266,9 +369,24 @@ const ExitHandler = {
     const speechOutput = requestAttributes.t('STOP_MESSAGE');       
     return handlerInput.responseBuilder
       .speak(speechOutput)
+      .withShouldEndSession(true)
       .getResponse();
   },
 };
+
+const IntentReflector = {
+  canHandle(handlerInput){
+    const request = handlerInput.requestEnvelope.request;
+    return request.type === 'IntentRequest';
+  },
+  handle(handlerInput) {
+    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+    const speechOutput = requestAttributes.t('GENERIC_NOT_SUPPORTED_RESPONSE');       
+    return handlerInput.responseBuilder
+      .speak(speechOutput)
+      .getResponse();
+  }
+}
 
 const SessionEndedRequestHandler = {
   canHandle(handlerInput) {
@@ -277,7 +395,6 @@ const SessionEndedRequestHandler = {
   },
   handle(handlerInput) {
     console.log(`Session ended with reason: ${handlerInput.requestEnvelope.request.reason}`);
-
     return handlerInput.responseBuilder.getResponse();
   },
 };
@@ -419,9 +536,21 @@ async function callDirectiveService(handlerInput, msg) {
   return directiveServiceClient.enqueue(directive, endpoint, token);
 }
 
-function sleep(milliseconds) {
-  return new Promise(resolve => setTimeout(resolve(), milliseconds));
- }
+function getFuncName() {
+   return getFuncName.caller.name;
+}
+
+const MarkSpecificIntentInterceptor ={
+  process (handlerInput){
+    const request = handlerInput.requestEnvelope.request;
+    const attributes = handlerInput.attributesManager.getRequestAttributes();
+    attributes.isSpecific = (request.intent  && 
+                            (request.intent.name === 'BiparietalDiameterIntent' ||
+                             request.intent.name === 'OccipitofrontalDiameterIntent' ||
+                             request.intent.name === 'AbdominalCircumferenceIntent' ||
+                             false));
+  }
+};
 
 const LocalizationInterceptor = {
     process(handlerInput) {
@@ -465,15 +594,21 @@ const skillBuilder = Alexa.SkillBuilders.custom();
 exports.handler = skillBuilder
   .addRequestHandlers(
     CFIRRecordParameterIntentHandler,
+    CFIRSpecificIntentHandler,
     LaunchRequestHandler,
     InProgressRecordParameterHandler,
     CompletedRecordParameterHandler,
-    GenericIntentHandler,
+    SpecificIntentHandler,
+    YesIntentHanlder,
     HelpHandler,
     ExitHandler,
+    IntentReflector,
     SessionEndedRequestHandler
   )
-  .addRequestInterceptors(LocalizationInterceptor)
+  .addRequestInterceptors(
+    LocalizationInterceptor,
+    MarkSpecificIntentInterceptor
+  )
   .addErrorHandlers(
     CFIRErrorHandler,
     ErrorHandler
