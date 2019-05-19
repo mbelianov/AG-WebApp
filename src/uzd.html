@@ -547,8 +547,10 @@
           $("form#uzd input#"+msg.parameter).change();
         }
         else if (msg.type === "specific"){
-            $("form#uzd input#"+msg.key).val(msg.value);
-            $("form#uzd input#"+msg.key).change();
+          msg.items.forEach(function(item){
+            $("form#uzd input#"+item.key).val(item.value);
+            $("form#uzd input#"+item.key).change();
+          });
         }
       }
       
