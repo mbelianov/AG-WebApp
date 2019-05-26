@@ -208,19 +208,50 @@
                         {
                             "name": "length_fraction",
                             "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "willAddGA",
+                            "type": "YesNoSlotType",
+                            "samples": [
+                                "{willAddGA} {ga_weeks} plus {ga_days}",
+                                "{willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                                "{willAddGA} {ga_weeks} weeks and {ga_days} days",
+                                "{willAddGA}"
+                            ]
+                        },
+                        {
+                            "name": "ga_weeks",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{ga_weeks} plus {ga_days}",
+                                "{ga_weeks} weeks plus {ga_days} days",
+                                "{ga_weeks} weeks and {ga_days} days"
+                            ]
+                        },
+                        {
+                            "name": "ga_days",
+                            "type": "AMAZON.NUMBER"
                         }
                     ],
                     "samples": [
-                        "write occipitofrontal diameter",
-                        "write occipitofrontal diameter of {length} point {length_fraction} millimeters",
-                        "write occipitofrontal diameter of {length} millimeters",
-                        "write occipitofrontal diameter of {length} millimeter",
+                        "write down occipitofrontal diameter of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "write down occipitofrontal diameter of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "write down occipitofrontal diameter of {length} point {length_fraction} millimeters",
+                        "write down occipitofrontal diameter of {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "write down occipitofrontal diameter of {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "write down occipitofrontal diameter of {length} millimeters",
+                        "length of occipitofrontal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "length of occipitofrontal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
                         "length of occipitofrontal diameter is {length} point {length_fraction} millimeters",
+                        "length of occipitofrontal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "length of occipitofrontal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
                         "length of occipitofrontal diameter is {length} millimeters",
-                        "length of occipitofrontal diameter is {length} millimeter",
+                        "occipitofrontal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "occipitofrontal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
                         "occipitofrontal diameter is {length} point {length_fraction} millimeters",
-                        "occipitofrontal diameter is {length} millimeters",
-                        "occipitofrontal diameter is {length} millimeter"
+                        "occipitofrontal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "occipitofrontal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "occipitofrontal diameter is {length} millimeters"
                     ]
                 },
                 {
@@ -240,19 +271,50 @@
                         {
                             "name": "length_fraction",
                             "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "willAddGA",
+                            "type": "YesNoSlotType",
+                            "samples": [
+                                "{willAddGA} {ga_weeks} plus {ga_days}",
+                                "{willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                                "{willAddGA} {ga_weeks} weeks and {ga_days} days",
+                                "{willAddGA}"
+                            ]
+                        },
+                        {
+                            "name": "ga_weeks",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{ga_weeks} plus {ga_days}",
+                                "{ga_weeks} weeks plus {ga_days} days",
+                                "{ga_weeks} weeks and {ga_days} days"
+                            ]
+                        },
+                        {
+                            "name": "ga_days",
+                            "type": "AMAZON.NUMBER"
                         }
                     ],
                     "samples": [
-                        "write abdominal circumference",
-                        "write abdominal circumference of {length} point {length_fraction} millimeters",
-                        "write abdominal circumference of {length} millimeters",
-                        "write abdominal circumference of {length} millimeter",
+                        "write down abdominal circumference of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "write down abdominal circumference of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "write down abdominal circumference of {length} point {length_fraction} millimeters",
+                        "write down abdominal circumference of {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "write down abdominal circumference of {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "write down abdominal circumference of {length} millimeters",
+                        "length of abdominal circumference is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "length of abdominal circumference is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
                         "length of abdominal circumference is {length} point {length_fraction} millimeters",
+                        "length of abdominal circumference is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "length of abdominal circumference is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
                         "length of abdominal circumference is {length} millimeters",
-                        "length of abdominal circumference is {length} millimeter",
+                        "abdominal circumference is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "abdominal circumference is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
                         "abdominal circumference is {length} point {length_fraction} millimeters",
-                        "abdominal circumference is {length} millimeters",
-                        "abdominal circumference is {length} millimeter"
+                        "abdominal circumference is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "abdominal circumference is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "abdominal circumference is {length} millimeters"
                     ]
                 },
                 {
@@ -637,7 +699,7 @@
                 },
                 {
                     "name": "OccipitofrontalDiameterIntent",
-                    "delegationStrategy": "ALWAYS",
+                    "delegationStrategy": "SKILL_RESPONSE",
                     "confirmationRequired": false,
                     "prompts": {},
                     "slots": [
@@ -656,12 +718,37 @@
                             "confirmationRequired": false,
                             "elicitationRequired": false,
                             "prompts": {}
+                        },
+                        {
+                            "name": "willAddGA",
+                            "type": "YesNoSlotType",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.555599606682.618531124320"
+                            }
+                        },
+                        {
+                            "name": "ga_weeks",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.148912958518.58342039961"
+                            }
+                        },
+                        {
+                            "name": "ga_days",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
                         }
                     ]
                 },
                 {
                     "name": "AbdominalCircumferenceIntent",
-                    "delegationStrategy": "ALWAYS",
+                    "delegationStrategy": "SKILL_RESPONSE",
                     "confirmationRequired": false,
                     "prompts": {},
                     "slots": [
@@ -676,6 +763,31 @@
                         },
                         {
                             "name": "length_fraction",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": false,
+                            "prompts": {}
+                        },
+                        {
+                            "name": "willAddGA",
+                            "type": "YesNoSlotType",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.555599606682.618531124320"
+                            }
+                        },
+                        {
+                            "name": "ga_weeks",
+                            "type": "AMAZON.NUMBER",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.148912958518.58342039961"
+                            }
+                        },
+                        {
+                            "name": "ga_days",
                             "type": "AMAZON.NUMBER",
                             "confirmationRequired": false,
                             "elicitationRequired": false,
