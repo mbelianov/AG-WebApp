@@ -129,8 +129,18 @@
                     ]
                 },
                 {
-                    "name": "BiparietalDiameterIntent",
+                    "name": "BiometricParameterIntent",
                     "slots": [
+                        {
+                            "name": "bm_param",
+                            "type": "BiometricParameter",
+                            "samples": [
+                                "it's {bm_param}",
+                                "it is {bm_param}",
+                                "{bm_param} please",
+                                "{bm_param}"
+                            ]
+                        },
                         {
                             "name": "length",
                             "type": "AMAZON.NUMBER",
@@ -171,155 +181,47 @@
                         }
                     ],
                     "samples": [
-                        "write down biparietal diameter of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "write down biparietal diameter of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "write down biparietal diameter of {length} point {length_fraction} millimeters",
-                        "write down biparietal diameter of {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "write down biparietal diameter of {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "write down biparietal diameter of {length} millimeters",
-                        "length of biparietal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "length of biparietal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "length of biparietal diameter is {length} point {length_fraction} millimeters",
-                        "length of biparietal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "length of biparietal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "length of biparietal diameter is {length} millimeters",
-                        "biparietal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "biparietal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "biparietal diameter is {length} point {length_fraction} millimeters",
-                        "biparietal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "biparietal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "biparietal diameter is {length} millimeters"
-                    ]
-                },
-                {
-                    "name": "OccipitofrontalDiameterIntent",
-                    "slots": [
-                        {
-                            "name": "length",
-                            "type": "AMAZON.NUMBER",
-                            "samples": [
-                                "{length} millimeter",
-                                "{length} millimeters",
-                                "{length} point {length_fraction}",
-                                "{length} point {length_fraction} millimeters",
-                                "{length}"
-                            ]
-                        },
-                        {
-                            "name": "length_fraction",
-                            "type": "AMAZON.NUMBER"
-                        },
-                        {
-                            "name": "willAddGA",
-                            "type": "YesNoSlotType",
-                            "samples": [
-                                "{willAddGA} {ga_weeks} plus {ga_days}",
-                                "{willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                                "{willAddGA} {ga_weeks} weeks and {ga_days} days",
-                                "{willAddGA}"
-                            ]
-                        },
-                        {
-                            "name": "ga_weeks",
-                            "type": "AMAZON.NUMBER",
-                            "samples": [
-                                "{ga_weeks} plus {ga_days}",
-                                "{ga_weeks} weeks plus {ga_days} days",
-                                "{ga_weeks} weeks and {ga_days} days"
-                            ]
-                        },
-                        {
-                            "name": "ga_days",
-                            "type": "AMAZON.NUMBER"
-                        }
-                    ],
-                    "samples": [
-                        "write down occipitofrontal diameter of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "write down occipitofrontal diameter of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "write down occipitofrontal diameter of {length} point {length_fraction} millimeters",
-                        "write down occipitofrontal diameter of {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "write down occipitofrontal diameter of {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "write down occipitofrontal diameter of {length} millimeters",
-                        "length of occipitofrontal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "length of occipitofrontal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "length of occipitofrontal diameter is {length} point {length_fraction} millimeters",
-                        "length of occipitofrontal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "length of occipitofrontal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "length of occipitofrontal diameter is {length} millimeters",
-                        "occipitofrontal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "occipitofrontal diameter is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "occipitofrontal diameter is {length} point {length_fraction} millimeters",
-                        "occipitofrontal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "occipitofrontal diameter is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "occipitofrontal diameter is {length} millimeters"
-                    ]
-                },
-                {
-                    "name": "AbdominalCircumferenceIntent",
-                    "slots": [
-                        {
-                            "name": "length",
-                            "type": "AMAZON.NUMBER",
-                            "samples": [
-                                "{length} millimeter",
-                                "{length} millimeters",
-                                "{length} point {length_fraction}",
-                                "{length} point {length_fraction} millimeters",
-                                "{length}"
-                            ]
-                        },
-                        {
-                            "name": "length_fraction",
-                            "type": "AMAZON.NUMBER"
-                        },
-                        {
-                            "name": "willAddGA",
-                            "type": "YesNoSlotType",
-                            "samples": [
-                                "{willAddGA} {ga_weeks} plus {ga_days}",
-                                "{willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                                "{willAddGA} {ga_weeks} weeks and {ga_days} days",
-                                "{willAddGA}"
-                            ]
-                        },
-                        {
-                            "name": "ga_weeks",
-                            "type": "AMAZON.NUMBER",
-                            "samples": [
-                                "{ga_weeks} plus {ga_days}",
-                                "{ga_weeks} weeks plus {ga_days} days",
-                                "{ga_weeks} weeks and {ga_days} days"
-                            ]
-                        },
-                        {
-                            "name": "ga_days",
-                            "type": "AMAZON.NUMBER"
-                        }
-                    ],
-                    "samples": [
-                        "write down abdominal circumference of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "write down abdominal circumference of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "write down abdominal circumference of {length} point {length_fraction} millimeters",
-                        "write down abdominal circumference of {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "write down abdominal circumference of {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "write down abdominal circumference of {length} millimeters",
-                        "length of abdominal circumference is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "length of abdominal circumference is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "length of abdominal circumference is {length} point {length_fraction} millimeters",
-                        "length of abdominal circumference is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "length of abdominal circumference is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "length of abdominal circumference is {length} millimeters",
-                        "abdominal circumference is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "abdominal circumference is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "abdominal circumference is {length} point {length_fraction} millimeters",
-                        "abdominal circumference is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
-                        "abdominal circumference is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
-                        "abdominal circumference is {length} millimeters"
+                        "write down {bm_param} of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "write down {bm_param} of {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "write down {bm_param} of {length} point {length_fraction} millimeters",
+                        "write down {bm_param} of {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "write down {bm_param} of {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "write down {bm_param} of {length} millimeters",
+                        "length of {bm_param} is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "length of {bm_param} is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "length of {bm_param} is {length} point {length_fraction} millimeters",
+                        "length of {bm_param} is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "length of {bm_param} is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "length of {bm_param} is {length} millimeters",
+                        "{bm_param} is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "{bm_param} is {length} point {length_fraction} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "{bm_param} is {length} point {length_fraction} millimeters",
+                        "{bm_param} is {length} millimeters {willAddGA} {ga_weeks} weeks and {ga_days} days",
+                        "{bm_param} is {length} millimeters {willAddGA} {ga_weeks} weeks plus {ga_days} days",
+                        "{bm_param} is {length} millimeters"
                     ]
                 },
                 {
                     "name": "AMAZON.YesIntent",
                     "samples": []
+                },
+                {
+                    "name": "EstimatedFetalWeightIntent",
+                    "slots": [
+                        {
+                            "name": "weight",
+                            "type": "AMAZON.NUMBER",
+                            "samples": [
+                                "{weight} grams"
+                            ]
+                        }
+                    ],
+                    "samples": [
+                        "write down fetal weight of {weight} grams",
+                        "fetal weight is {weight} grams",
+                        "write down estimated fetal weigth of {weight} grams",
+                        "estimated fetal weight is {weight} grams"
+                    ]
                 }
             ],
             "types": [
@@ -603,6 +505,107 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "BiometricParameter",
+                    "values": [
+                        {
+                            "id": "bpd",
+                            "name": {
+                                "value": "biparietal diameter",
+                                "synonyms": [
+                                    "B.P.D."
+                                ]
+                            }
+                        },
+                        {
+                            "id": "nb",
+                            "name": {
+                                "value": "nasal bond",
+                                "synonyms": [
+                                    "N.B."
+                                ]
+                            }
+                        },
+                        {
+                            "id": "nf",
+                            "name": {
+                                "value": "nuchal fold",
+                                "synonyms": [
+                                    "N.F."
+                                ]
+                            }
+                        },
+                        {
+                            "id": "tad",
+                            "name": {
+                                "value": "transverse abdominal diameter"
+                            }
+                        },
+                        {
+                            "id": "apad",
+                            "name": {
+                                "value": "anterior posterior abdominal diameter",
+                                "synonyms": [
+                                    "A.P.A.D."
+                                ]
+                            }
+                        },
+                        {
+                            "id": "fl",
+                            "name": {
+                                "value": "femur length"
+                            }
+                        },
+                        {
+                            "id": "cm",
+                            "name": {
+                                "value": "cisterna magna diameter",
+                                "synonyms": [
+                                    "cisterna magna"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "tcd",
+                            "name": {
+                                "value": "trans cerebral diameter"
+                            }
+                        },
+                        {
+                            "id": "vp",
+                            "name": {
+                                "value": "posterior cerebral ventricular diameter",
+                                "synonyms": [
+                                    "V.P."
+                                ]
+                            }
+                        },
+                        {
+                            "id": "hc",
+                            "name": {
+                                "value": "head circumference",
+                                "synonyms": [
+                                    "head circle"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ac",
+                            "name": {
+                                "value": "abdominal circumference",
+                                "synonyms": [
+                                    "abdominal circle"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "ofd",
+                            "name": {
+                                "value": "occipitofrontal diameter"
+                            }
+                        }
+                    ]
                 }
             ]
         },
@@ -649,11 +652,20 @@
                     ]
                 },
                 {
-                    "name": "BiparietalDiameterIntent",
+                    "name": "BiometricParameterIntent",
                     "delegationStrategy": "SKILL_RESPONSE",
                     "confirmationRequired": false,
                     "prompts": {},
                     "slots": [
+                        {
+                            "name": "bm_param",
+                            "type": "BiometricParameter",
+                            "confirmationRequired": false,
+                            "elicitationRequired": true,
+                            "prompts": {
+                                "elicitation": "Elicit.Slot.501819966958.575341476262"
+                            }
+                        },
                         {
                             "name": "length",
                             "type": "AMAZON.NUMBER",
@@ -698,100 +710,19 @@
                     ]
                 },
                 {
-                    "name": "OccipitofrontalDiameterIntent",
-                    "delegationStrategy": "SKILL_RESPONSE",
+                    "name": "EstimatedFetalWeightIntent",
+                    "delegationStrategy": "ALWAYS",
                     "confirmationRequired": false,
                     "prompts": {},
                     "slots": [
                         {
-                            "name": "length",
+                            "name": "weight",
                             "type": "AMAZON.NUMBER",
                             "confirmationRequired": false,
                             "elicitationRequired": true,
                             "prompts": {
-                                "elicitation": "Elicit.Slot.957645674870.424558227038"
+                                "elicitation": "Elicit.Slot.263306507835.809088245615"
                             }
-                        },
-                        {
-                            "name": "length_fraction",
-                            "type": "AMAZON.NUMBER",
-                            "confirmationRequired": false,
-                            "elicitationRequired": false,
-                            "prompts": {}
-                        },
-                        {
-                            "name": "willAddGA",
-                            "type": "YesNoSlotType",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.555599606682.618531124320"
-                            }
-                        },
-                        {
-                            "name": "ga_weeks",
-                            "type": "AMAZON.NUMBER",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.148912958518.58342039961"
-                            }
-                        },
-                        {
-                            "name": "ga_days",
-                            "type": "AMAZON.NUMBER",
-                            "confirmationRequired": false,
-                            "elicitationRequired": false,
-                            "prompts": {}
-                        }
-                    ]
-                },
-                {
-                    "name": "AbdominalCircumferenceIntent",
-                    "delegationStrategy": "SKILL_RESPONSE",
-                    "confirmationRequired": false,
-                    "prompts": {},
-                    "slots": [
-                        {
-                            "name": "length",
-                            "type": "AMAZON.NUMBER",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.957645674870.424558227038"
-                            }
-                        },
-                        {
-                            "name": "length_fraction",
-                            "type": "AMAZON.NUMBER",
-                            "confirmationRequired": false,
-                            "elicitationRequired": false,
-                            "prompts": {}
-                        },
-                        {
-                            "name": "willAddGA",
-                            "type": "YesNoSlotType",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.555599606682.618531124320"
-                            }
-                        },
-                        {
-                            "name": "ga_weeks",
-                            "type": "AMAZON.NUMBER",
-                            "confirmationRequired": false,
-                            "elicitationRequired": true,
-                            "prompts": {
-                                "elicitation": "Elicit.Slot.148912958518.58342039961"
-                            }
-                        },
-                        {
-                            "name": "ga_days",
-                            "type": "AMAZON.NUMBER",
-                            "confirmationRequired": false,
-                            "elicitationRequired": false,
-                            "prompts": {}
                         }
                     ]
                 }
@@ -849,6 +780,24 @@
                     {
                         "type": "PlainText",
                         "value": "would you like to add gestational age"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.501819966958.575341476262",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "Which biometric parameter would you like to record"
+                    }
+                ]
+            },
+            {
+                "id": "Elicit.Slot.263306507835.809088245615",
+                "variations": [
+                    {
+                        "type": "PlainText",
+                        "value": "what  weight should I write"
                     }
                 ]
             }

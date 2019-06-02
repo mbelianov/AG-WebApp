@@ -228,6 +228,13 @@ const SpecificIntentHandler = {
     var speechOutput = requestAttributes.t('GENERIC_NOT_SUPPORTED_RESPONSE');
     var repromptMsg = requestAttributes.t('INTENT_REPROMPT');
 
+    if (!slotValues.bm_param.isValidated){
+      return responseBuilder
+        .speak(requestAttributes.t("ASK_FOR_BIOMETRIC_PARAMETER_PROMPT"))
+        .reprompt(requestAttributes.t("ASK_FOR_BIOMETRIC_PARAMETER_REPROMPT"))
+        .addElicitSlotDirective("bm_param").getResponse();
+    }
+
     if (!slotValues.length || !slotValues.length.synonym || slotValues.length.synonym == 'undefined') //length is mising. Ask for it
       return responseBuilder
         .speak(requestAttributes.t("LENGTH_SLOT_MISSING_PROMPT"))
@@ -241,7 +248,7 @@ const SpecificIntentHandler = {
         .addElicitSlotDirective('length').getResponse();    
     
     if (isNaN(slotValues.ga_weeks.synonym) && slotValues.willAddGA.isValidated && slotValues.willAddGA.id == 'TRUE'){ 
-      //if ga_weeks is already populated with a number, then we assume user wants to add gestational age and we do not care for willAddGA indicator
+      //we ask for gestatiotnal age only if ga_weeks is not aleady populated with a number
       return responseBuilder
         .speak(requestAttributes.t('GESTATIONAL_AGE_MISSING_PROMPT'))
         .reprompt(requestAttributes.t('GESTATIONAL_AGE_MISSING_REPROMPT'))
@@ -250,7 +257,7 @@ const SpecificIntentHandler = {
     }    
     
     if (isNaN(slotValues.ga_weeks.synonym) && !slotValues.willAddGA.isValidated){
-      //if ga_weeks is already populated with a number, then we assume user wants to add gestational age and we do not care for willAddGA indicator      
+      //ask the use if he want to add gestational age    
       return responseBuilder
         .speak(requestAttributes.t('PROMPT_FOR_GESTATIONAL_AGE'))
         .reprompt(requestAttributes.t('REPROMPT_FOR_GESTATIONAL_AGE'))
@@ -260,6 +267,7 @@ const SpecificIntentHandler = {
     
 
     if (!isNaN(slotValues.ga_weeks.synonym) && slotValues.ga_days.synonym && isNaN(slotValues.ga_days.synonym)){
+      //if ga_weeks is already populated with a number, then we assume user wants to add gestational age and we do not care for willAddGA indicator
       return responseBuilder
         .speak(requestAttributes.t('GESTATIONAL_AGE_AMBIGUOUS_PROMPT'))
         .reprompt(requestAttributes.t('GESTATIONAL_AGE_AMBIGUOUS_REPROMPT'))
@@ -284,6 +292,64 @@ const SpecificIntentHandler = {
     }
     
     switch (request.intent.name){
+      case "BiometricParameterIntent":
+        switch (slotValues.bm_param.id) {
+          case 'bpd':
+            buildUpMsg("bpd");
+            speechOutput = requestAttributes.t('BIPARIETAL_DIAMETER_INTENT_RESPONSE', msg.items[0].value);
+            break;          
+          case 'ofd':
+            buildUpMsg("ofd");
+            speechOutput = requestAttributes.t('OCCIPTOFRONTAL_DIAMETER_INTENT_RESPONSE', msg.items[0].value);
+            break;
+          case 'ac':
+            buildUpMsg("ac");
+            speechOutput = requestAttributes.t('ABDOMINAL_CIRCUMFERENCE_INTENT_RESPONSE', msg.items[0].value);
+            break;
+          case 'nb':
+            buildUpMsg("nb");
+            speechOutput = requestAttributes.t('NASAL_BOND_INTENT_RESPONSE', msg.items[0].value);
+            break;
+          case 'nf':
+            buildUpMsg("nf");
+            speechOutput = requestAttributes.t('ABDOMINAL_CIRCUMFERENCE_INTENT_RESPONSE', msg.items[0].value);
+            break;     
+          case 'tad':
+            buildUpMsg("tad");
+            speechOutput = requestAttributes.t('TRANSVERSAL_ABDOMINAL_INTENT_RESPONSE', msg.items[0].value);
+            break;   
+          case 'apad':
+            buildUpMsg("apad");
+            speechOutput = requestAttributes.t('ANTEROPOSTERIOR_ABDOMINAL_INTENT_RESPONSE', msg.items[0].value);
+            break;    
+          case 'efw':
+            buildUpMsg("efw");
+            speechOutput = requestAttributes.t('ESTIMATED_FETAL_WEIGHT_INTENT_RESPONSE', msg.items[0].value);
+            break;   
+          case 'fl':
+            buildUpMsg("fl");
+            speechOutput = requestAttributes.t('FEMUR_LENGTH_INTENT_RESPONSE', msg.items[0].value);
+            break;    
+          case 'cm':
+            buildUpMsg("cm");
+            speechOutput = requestAttributes.t('CISTERNA_MAGNA_INTENT_RESPONSE', msg.items[0].value);
+            break;  
+          case 'tcd':
+            buildUpMsg("tcd");
+            speechOutput = requestAttributes.t('TRANS_CEREBRAL_INTENT_RESPONSE', msg.items[0].value);
+            break;
+          case 'vp':
+            buildUpMsg("vp");
+            speechOutput = requestAttributes.t('POSTERIOR_CEREBRAL_VENTRICULAR_INTENT_RESPONSE', msg.items[0].value);
+            break; 
+          case 'hc':
+            buildUpMsg("hc");
+            speechOutput = requestAttributes.t('HEAD_CIRCUMFERENCE_INTENT_RESPONSE', msg.items[0].value);
+            break;             
+          default:
+            // code
+        }
+        break;
       case "BiparietalDiameterIntent":
         buildUpMsg("bpd");
         speechOutput = requestAttributes.t('BIPARIETAL_DIAMETER_INTENT_RESPONSE', msg.items[0].value);
@@ -297,7 +363,7 @@ const SpecificIntentHandler = {
         speechOutput = requestAttributes.t('OCCIPTOFRONTAL_DIAMETER_INTENT_RESPONSE', msg.items[0].value);
         break;        
       default:
-      ;
+      // code
     }
     
     if (!isNaN(slotValues.ga_weeks.synonym)){
@@ -323,6 +389,49 @@ const SpecificIntentHandler = {
       .getResponse();
   }
 };
+
+
+const EstimatedFetalWeitghtIntent = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    return request.type === 'IntentRequest' && request.intent.name === 'EstimatedFetalWeightIntent';
+  },
+  async handle(handlerInput) {
+    const responseBuilder = handlerInput.responseBuilder;
+    const requestAttributes = handlerInput.attributesManager.getRequestAttributes();
+
+    const filledSlots = handlerInput.requestEnvelope.request.intent.slots;
+    const slotValues = getSlotValues(filledSlots);
+    console.log(slotValues);
+        
+    var speechOutput = requestAttributes.t('ESTIMATED_FETAL_WEIGHT_INTENT_RESPONSE', slotValues.weight.synonym);
+    var repromptMsg = requestAttributes.t('INTENT_REPROMPT');
+    
+    var msg = {};
+        msg.type = "specific";
+        msg.items = [];
+        msg.items[0] = {};
+        msg.items[0].key = "efw";
+        msg.items[0].value = slotValues.weight.synonym; 
+        
+    speechOutput += requestAttributes.t("ANYTHING_ELSE_PROMPT");
+    
+    let activeUI = await notifyUI(JSON.stringify(msg));
+    if (activeUI.count == 0) 
+        speechOutput = requestAttributes.t('FEEDBACK_NO_ACTIVE_EXAM_FORM');
+    if (activeUI.count > 1) 
+        speechOutput = requestAttributes.t('FEEDBACK_MORE_THAN_1_ACTIVE_EXAM_FORM');
+        
+    console.log(msg);
+    return responseBuilder
+      .speak(speechOutput)
+      .withSimpleCard("Output", JSON.stringify(msg))
+      .reprompt(repromptMsg)
+      .getResponse();
+  },
+};
+
+
 
 const HelpHandler = {
   canHandle(handlerInput) {
@@ -545,7 +654,8 @@ const MarkSpecificIntentInterceptor ={
     const request = handlerInput.requestEnvelope.request;
     const attributes = handlerInput.attributesManager.getRequestAttributes();
     attributes.isSpecific = (request.intent  && 
-                            (request.intent.name === 'BiparietalDiameterIntent' ||
+                            (request.intent.name === 'BiometricParameterIntent' ||
+                             request.intent.name === 'BiparietalDiameterIntent' ||
                              request.intent.name === 'OccipitofrontalDiameterIntent' ||
                              request.intent.name === 'AbdominalCircumferenceIntent' ||
                              false));
@@ -599,6 +709,7 @@ exports.handler = skillBuilder
     InProgressRecordParameterHandler,
     CompletedRecordParameterHandler,
     SpecificIntentHandler,
+    EstimatedFetalWeitghtIntent,
     YesIntentHanlder,
     HelpHandler,
     ExitHandler,
